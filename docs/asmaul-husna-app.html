@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asmaul Husna — Latihan Hafalan & Makna</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans (Latin bulat & bersih) + Amiri (Arab berharakat jelas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+          },
+          colors: {
+            cream: {
+              50: '#FDFBF9',
+              100: '#F8F4F0',
+              200: '#EFE8E0',
+              300: '#E2D6C9',
+            },
+            sakura: {
+              50: '#FFF5F6',
+              100: '#FFE4E8',
+              200: '#FECDD4',
+              400: '#FB7185',
+              500: '#F43F5E',
+              600: '#E11D48',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Transisi lembut untuk perpindahan tema dan kartu */
+    body {
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      line-height: 1.85;
+      direction: rtl;
+    }
+
+    /* Animasi halus untuk umpan balik kartu */
+    @keyframes gentleShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+    .animate-shake {
+      animation: gentleShake 0.3s ease-in-out;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page-enter {
+      animation: fadeSlideUp 0.25s ease-out forwards;
+    }
+
+    /* Custom scrollbar yang rapi */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(168, 162, 158, 0.35);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-cream-100 text-stone-800 dark:bg-stone-950 dark:text-stone-100 min-h-screen antialiased selection:bg-rose-200 selection:text-stone-900">
+
+  <!-- Container Utama Mobile-First -->
+  <div id="app" class="max-w-md mx-auto min-h-screen bg-cream-50 dark:bg-stone-900 shadow-sm border-x border-cream-200/70 dark:border-stone-800/80 flex flex-col relative overflow-x-hidden">
+    <!-- Konten dirender dinamis oleh JS -->
+  </div>
+
+  <!-- Modal Konfirmasi Custom (Menggantikan alert/confirm) -->
+  <div id="modal-backdrop" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-900/50 backdrop-blur-xs p-4">
+    <div id="modal-box" class="bg-cream-50 dark:bg-stone-900 border border-cream-200 dark:border-stone-800 rounded-3xl max-w-sm w-full p-6 shadow-xl page-enter">
+      <h3 id="modal-title" class="text-lg font-bold text-stone-800 dark:text-stone-100 mb-2">Konfirmasi</h3>
+      <p id="modal-message" class="text-sm text-stone-600 dark:text-stone-300 leading-relaxed mb-6"></p>
+      <div id="modal-actions" class="flex gap-3 justify-end"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Ringan -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-stone-800 dark:bg-stone-100 text-cream-50 dark:text-stone-900 text-xs font-medium px-4 py-2.5 rounded-full shadow-lg transition-opacity duration-300"></div>
+
+  <script>
+    /**
+     * =========================================================================
+     * 1. DATA STATIS: REFERENSI & 99 ASMAUL HUSNA
+     * =========================================================================
+     */
+    const REFERENCES = {
+      'ref-quran': {
+        id: 'ref-quran',
+        title: 'Al-Qur\'an al-Karim',
+        author: 'Kalamullah',
+      },
+      'ref-ghazali': {
+        id: 'ref-ghazali',
+        title: 'Al-Maqsad al-Asna fi Syarh Ma\'ani Asma\' Allah al-Husna',
+        author: 'Imam Abu Hamid Al-Ghazali',
+      },
+      'ref-utsaimin': {
+        id: 'ref-utsaimin',
+        title: 'Majmu\' Fatawa wa Rasa\'il',
+        author: 'Syaikh Muhammad bin Shalih Al-Utsaimin',
+      },
+      'ref-saadi': {
+        id: 'ref-saadi',
+        title: 'Taisir al-Karim ar-Rahman fi Tafsir Kalam al-Mannan',
+        author: 'Syaikh Abdurrahman bin Nashir As-Sa\'di',
+      }
+    };
+
+    const META_CONTENT = {
+      version: 'Versi 0.1.0 Beta',
+      bismillah: {
+        arabic: 'بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ',
+        translation: 'Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.'
+      },
+      hadithNote: 'Catatan Transparansi: Daftar 99 nama ini merujuk pada riwayat at-Tirmidzi yang populer. Para ulama hadis menilai perincian nama di dalamnya memiliki kelemahan dari sisi sanad, sementara riwayat Bukhari dan Muslim menyebut jumlah 99 tanpa merincinya. Nama-nama Allah tidak terbatas pada 99 saja.'
+    };
+
+    // 30 Nama pertama dengan penjelasan rinci & referensi lengkap, dilanjutkan 69 nama berikutnya hingga 99
+    const DETAILED_30_NAMES = [
+      { order: 1, arabic: 'ٱلرَّحْمَٰنُ', latin: 'Ar-Rahman', meaning: 'Yang Maha Pengasih', explanation: 'Allah memiliki kasih sayang yang sangat luas dan menyeluruh kepada seluruh makhluk-Nya di dunia tanpa terkecuali, mencakup pemberian rezeki, kehidupan, dan nikmat duniawi.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Fatihah [1]: 1, 3' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Ar-Rahman wa Ar-Rahim' }] },
+      { order: 2, arabic: 'ٱلرَّحِيمُ', latin: 'Ar-Rahim', meaning: 'Yang Maha Penyayang', explanation: 'Allah memiliki kasih sayang yang khusus dan kekal yang dianugerahkan kepada hamba-hamba-Nya yang beriman berupa hidayah di dunia serta ampunan dan surga di akhirat.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Ahzab [33]: 43' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Ar-Rahman wa Ar-Rahim' }] },
+      { order: 3, arabic: 'ٱلْمَلِكُ', latin: 'Al-Malik', meaning: 'Yang Maha Merajai', explanation: 'Allah adalah Penguasa mutlak atas seluruh alam semesta. Kerajaan-Nya tidak membutuhkan siapa pun, sedangkan seluruh makhluk bergantung penuh kepada-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Malik' }] },
+      { order: 4, arabic: 'ٱلْقُدُّوسُ', latin: 'Al-Quddus', meaning: 'Yang Maha Suci', explanation: 'Allah Maha Suci dari segala sifat kekurangan, cacat, cela, dan dari segala sesuatu yang tidak layak bagi keagungan dan kesempurnaan-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Jumu\'ah [62]: 1' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Al-Hasyr: 23' }] },
+      { order: 5, arabic: 'ٱلسَّلَامُ', latin: 'As-Salam', meaning: 'Yang Maha Memberi Kesejahteraan', explanation: 'Allah Maha Sejahtera dari segala aib dan kekurangan, serta sumber keselamatan dan kedamaian bagi seluruh makhluk-Nya di dunia dan akhirat.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-ghazali', loc: 'Bab Syarh As-Salam' }] },
+      { order: 6, arabic: 'ٱلْمُؤْمِنُ', latin: 'Al-Mu\'min', meaning: 'Yang Maha Memberi Keamanan', explanation: 'Allah memberikan rasa aman kepada hamba-hamba-Nya dari kezaliman dan azab-Nya bagi yang beriman, serta membenarkan janji-Nya dan risalah para rasul.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-saadi', loc: 'Tafsir Asmaul Husna' }] },
+      { order: 7, arabic: 'ٱلْمُهَيْمِنُ', latin: 'Al-Muhaimin', meaning: 'Yang Maha Memelihara', explanation: 'Allah Maha Mengawasi, menyaksikan, menjaga, dan memelihara segala amal perbuatan serta urusan seluruh makhluk-Nya tanpa ada satu pun yang luput.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Muhaimin' }] },
+      { order: 8, arabic: 'ٱلْعَزِيزُ', latin: 'Al-Aziz', meaning: 'Yang Maha Perkasa', explanation: 'Allah Maha Perkasa yang tidak dapat dikalahkan oleh siapa pun. Segala kemuliaan dan kekuatan milik-Nya semata.', citations: [{ refId: 'ref-quran', loc: 'QS. Ali \'Imran [3]: 62' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Al-Hasyr: 23' }] },
+      { order: 9, arabic: 'ٱلْجَبَّارُ', latin: 'Al-Jabbar', meaning: 'Yang Maha Kuasa Memaksakan Kehendak', explanation: 'Allah Maha Tinggi dan Maha Kuasa melaksanakan kehendak-Nya atas seluruh makhluk, sekaligus Maha Memulihkan hati yang patah dan memperbaiki keadaan hamba yang lemah.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Jabbar' }] },
+      { order: 10, arabic: 'ٱلْمُتَكَبِّرُ', latin: 'Al-Mutakabbir', meaning: 'Yang Memiliki Segala Kebesaran', explanation: 'Allah pemilik satu-satunya hak atas keagungan dan kebesaran sejati, serta Maha Agung dari segala sifat makhluk yang rendah dan terbatas.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 23' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Mutakabbir' }] },
+      { order: 11, arabic: 'ٱلْخَالِقُ', latin: 'Al-Khaliq', meaning: 'Yang Maha Pencipta', explanation: 'Allah menciptakan segala sesuatu dari ketiadaan tanpa contoh sebelumnya, dengan ukuran dan ketetapan yang sempurna.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 24' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Khaliq' }] },
+      { order: 12, arabic: 'ٱلْبَارِئُ', latin: 'Al-Bari\'', meaning: 'Yang Maha Mengadakan dari Tiada', explanation: 'Allah mewujudkan dan melepaskan ciptaan-Nya ke alam nyata dalam keadaan serasi, bebas dari cacat atau ketimpangan.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 24' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Al-Hasyr: 24' }] },
+      { order: 13, arabic: 'ٱلْمُصَوِّرُ', latin: 'Al-Mushawwir', meaning: 'Yang Maha Membentuk Rupa', explanation: 'Allah membentuk setiap ciptaan-Nya dengan rupa, ciri, dan susunan yang unik dan indah sesuai kebijaksanaan-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Hasyr [59]: 24' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Mushawwir' }] },
+      { order: 14, arabic: 'ٱلْغَفَّارُ', latin: 'Al-Ghaffar', meaning: 'Yang Maha Pengampun', explanation: 'Allah senantiasa dan berulang kali mengampuni dosa-dosa hamba-Nya yang bertaubat serta menutupi keburukan mereka di dunia dan akhirat.', citations: [{ refId: 'ref-quran', loc: 'QS. Nuh [71]: 10' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Ghaffar' }] },
+      { order: 15, arabic: 'ٱلْقَهَّارُ', latin: 'Al-Qahhar', meaning: 'Yang Maha Menundukkan', explanation: 'Allah menundukkan seluruh makhluk di bawah kekuasaan dan kehendak-Nya; tidak ada satu kekuatan pun yang mampu menentang ketetapan-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Ar-Ra\'d [13]: 16' }, { refId: 'ref-saadi', loc: 'Tafsir Asmaul Husna' }] },
+      { order: 16, arabic: 'ٱلْوَهَّابُ', latin: 'Al-Wahhab', meaning: 'Yang Maha Pemberi Karunia', explanation: 'Allah memberi karunia dan nikmat secara terus-menerus tanpa mengharap imbalan dan tanpa batas kepada siapa saja yang dikehendaki-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Ali \'Imran [3]: 8' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Wahhab' }] },
+      { order: 17, arabic: 'ٱلرَّزَّاقُ', latin: 'Ar-Razzaq', meaning: 'Yang Maha Pemberi Rezeki', explanation: 'Allah menjamin dan membagikan rezeki lahir maupun batin kepada seluruh makhluk hidup di darat, laut, maupun udara.', citations: [{ refId: 'ref-quran', loc: 'QS. Adz-Dzariyat [51]: 58' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Adz-Dzariyat: 58' }] },
+      { order: 18, arabic: 'ٱلْفَتَّاحُ', latin: 'Al-Fattah', meaning: 'Yang Maha Pembuka Rahmat', explanation: 'Allah membuka pintu-pintu rahmat, rezeki, ilmu, jalan keluar dari kesulitan, serta memberi keputusan yang adil di antara hamba-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Saba\' [34]: 26' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Fattah' }] },
+      { order: 19, arabic: 'ٱلْعَلِيمُ', latin: 'Al-\'Alim', meaning: 'Yang Maha Mengetahui', explanation: 'Ilmu Allah meliputi segala sesuatu yang tampak maupun tersembunyi, yang telah berlalu, sedang terjadi, maupun yang akan datang.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Baqarah [2]: 29' }, { refId: 'ref-utsaimin', loc: 'Majmu\' Fatawa 1/122' }] },
+      { order: 20, arabic: 'ٱلْقَابِضُ', latin: 'Al-Qabidh', meaning: 'Yang Maha Menyempitkan', explanation: 'Allah menahan dan menyempitkan rezeki atau kelapangan bagi sebagian hamba-Nya berdasarkan ilmu dan hikmah-Nya yang sempurna.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Baqarah [2]: 245' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Qabidh wa Al-Basith' }] },
+      { order: 21, arabic: 'ٱلْبَاسِطُ', latin: 'Al-Basith', meaning: 'Yang Maha Melapangkan', explanation: 'Allah melapangkan rezeki, rahmat, dan ketenangan hati bagi hamba-hamba yang dikehendaki-Nya dengan penuh kemurahan.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Baqarah [2]: 245' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Qabidh wa Al-Basith' }] },
+      { order: 22, arabic: 'ٱلْخَافِضُ', latin: 'Al-Khafidh', meaning: 'Yang Maha Merendahkan', explanation: 'Allah merendahkan derajat orang-orang yang sombong, zalim, dan menentang kebenaran.', citations: [{ refId: 'ref-ghazali', loc: 'Bab Syarh Al-Khafidh wa Ar-Rafi\'' }] },
+      { order: 23, arabic: 'ٱلرَّافِعُ', latin: 'Ar-Rafi\'', meaning: 'Yang Maha Meninggikan', explanation: 'Allah meninggikan derajat hamba-hamba-Nya yang beriman, berilmu, dan bertakwa di dunia maupun di akhirat.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-Mujadilah [58]: 11' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Khafidh wa Ar-Rafi\'' }] },
+      { order: 24, arabic: 'ٱلْمُعِزُّ', latin: 'Al-Mu\'izz', meaning: 'Yang Maha Memuliakan', explanation: 'Allah menganugerahkan kemuliaan dan kehormatan sejati kepada siapa saja yang dikehendaki-Nya karena ketaatan kepada-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Ali \'Imran [3]: 26' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Ali \'Imran: 26' }] },
+      { order: 25, arabic: 'ٱلْمُذِلُّ', latin: 'Al-Mudzill', meaning: 'Yang Maha Menghinakan', explanation: 'Allah menimpakan kehinaan kepada siapa saja yang berpaling dari ketaatan kepada-Nya dan menyombongkan diri.', citations: [{ refId: 'ref-quran', loc: 'QS. Ali \'Imran [3]: 26' }, { refId: 'ref-saadi', loc: 'Tafsir QS. Ali \'Imran: 26' }] },
+      { order: 26, arabic: 'ٱلسَّمِيعُ', latin: 'As-Sami\'', meaning: 'Yang Maha Mendengar', explanation: 'Allah mendengar seluruh suara, bisikan hati, doa, dan permohonan makhluk-Nya dalam berbagai bahasa tanpa terhalang jarak.', citations: [{ refId: 'ref-quran', loc: 'QS. Asy-Syura [42]: 11' }, { refId: 'ref-ghazali', loc: 'Bab Syarh As-Sami\'' }] },
+      { order: 27, arabic: 'ٱلْبَصِيرُ', latin: 'Al-Bashir', meaning: 'Yang Maha Melihat', explanation: 'Allah melihat segala sesuatu secara rinci, baik yang tampak jelas maupun yang tersembunyi di dalam kegelapan.', citations: [{ refId: 'ref-quran', loc: 'QS. Asy-Syura [42]: 11' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Bashir' }] },
+      { order: 28, arabic: 'ٱلْحَكَمُ', latin: 'Al-Hakam', meaning: 'Yang Maha Menetapkan Hukum', explanation: 'Allah adalah Hakim yang paling adil; keputusan-Nya pasti berlaku dan tidak ada satu pun yang dapat membatalkan ketetapan-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-An\'am [6]: 114' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-Hakam' }] },
+      { order: 29, arabic: 'ٱلْعَدْلُ', latin: 'Al-\'Adl', meaning: 'Yang Maha Adil', explanation: 'Allah Maha Adil dalam seluruh penciptaan, syariat, dan balasan amal; Dia tidak pernah menzalimi hamba-Nya sedikit pun.', citations: [{ refId: 'ref-quran', loc: 'QS. Al-An\'am [6]: 115' }, { refId: 'ref-ghazali', loc: 'Bab Syarh Al-\'Adl' }] },
+      { order: 30, arabic: 'ٱللَّطِيفُ', latin: 'Al-Lathif', meaning: 'Yang Maha Lembut', explanation: 'Allah Maha Halus ilmu-Nya hingga menjangkau perkara paling tersembunyi, serta Maha Lembut dalam mengantarkan kebaikan kepada hamba-Nya.', citations: [{ refId: 'ref-quran', loc: 'QS. Asy-Syura [42]: 19' }, { refId: 'ref-saadi', loc: 'Tafsir Asmaul Husna' }] },
+    ];
+
+    // Sisa nama 31–99 agar seluruh 99 nama tampil lengkap dan dapat dilatih
+    const REMAINING_69_NAMES = [
+      ['ٱلْخَبِيرُ', 'Al-Khabir', 'Yang Maha Mengenal'],
+      ['ٱلْحَلِيمُ', 'Al-Halim', 'Yang Maha Penyantun'],
+      ['ٱلْعَظِيمُ', 'Al-\'Azhim', 'Yang Maha Agung'],
+      ['ٱلْغَفُورُ', 'Al-Ghafur', 'Yang Maha Pengampun'],
+      ['ٱلشَّكُورُ', 'Asy-Syakur', 'Yang Maha Pembalas Budi'],
+      ['ٱلْعَلِيُّ', 'Al-\'Aliyy', 'Yang Maha Tinggi'],
+      ['ٱلْكَبِيرُ', 'Al-Kabir', 'Yang Maha Besar'],
+      ['ٱلْحَفِيظُ', 'Al-Hafizh', 'Yang Maha Memelihara'],
+      ['ٱلْمُقِيتُ', 'Al-Muqit', 'Yang Maha Pemberi Kecukupan'],
+      ['ٱلْحَسِيبُ', 'Al-Hasib', 'Yang Maha Membuat Perhitungan'],
+      ['ٱلْجَلِيلُ', 'Al-Jalil', 'Yang Maha Luhur'],
+      ['ٱلْكَرِيمُ', 'Al-Karim', 'Yang Maha Pemurah'],
+      ['ٱلرَّقِيبُ', 'Ar-Raqib', 'Yang Maha Mengawasi'],
+      ['ٱلْمُجِيبُ', 'Al-Mujib', 'Yang Maha Mengabulkan'],
+      ['ٱلْوَاسِعُ', 'Al-Wasi\'', 'Yang Maha Luas'],
+      ['ٱلْحَكِيمُ', 'Al-Hakim', 'Yang Maha Bijaksana'],
+      ['ٱلْوَدُودُ', 'Al-Wadud', 'Yang Maha Mengasihi'],
+      ['ٱلْمَجِيدُ', 'Al-Majid', 'Yang Maha Mulia'],
+      ['ٱلْبَاعِثُ', 'Al-Ba\'its', 'Yang Maha Membangkitkan'],
+      ['ٱلشَّهِيدُ', 'Asy-Syahid', 'Yang Maha Menyaksikan'],
+      ['ٱلْحَقُّ', 'Al-Haqq', 'Yang Maha Benar'],
+      ['ٱلْوَكِيلُ', 'Al-Wakil', 'Yang Maha Memelihara'],
+      ['ٱلْقَوِيُّ', 'Al-Qawiyy', 'Yang Maha Kuat'],
+      ['ٱلْمَتِينُ', 'Al-Matin', 'Yang Maha Kokoh'],
+      ['ٱلْوَلِيُّ', 'Al-Waliyy', 'Yang Maha Melindungi'],
+      ['ٱلْحَمِيدُ', 'Al-Hamid', 'Yang Maha Terpuji'],
+      ['ٱلْمُحْصِي', 'Al-Muhshi', 'Yang Maha Menghitung'],
+      ['ٱلْمُبْدِئُ', 'Al-Mubdi\'', 'Yang Maha Memulai'],
+      ['ٱلْمُعِيدُ', 'Al-Mu\'id', 'Yang Maha Mengembalikan'],
+      ['ٱلْمُحْيِي', 'Al-Muhyi', 'Yang Maha Menghidupkan'],
+      ['ٱلْمُمِيتُ', 'Al-Mumit', 'Yang Maha Mematikan'],
+      ['ٱلْحَيُّ', 'Al-Hayy', 'Yang Maha Hidup'],
+      ['ٱلْقَيُّومُ', 'Al-Qayyum', 'Yang Maha Mandiri'],
+      ['ٱلْوَاجِدُ', 'Al-Wajid', 'Yang Maha Menemukan'],
+      ['ٱلْمَاجِدُ', 'Al-Majid', 'Yang Maha Mulia'],
+      ['ٱلْوَاحِدُ', 'Al-Wahid', 'Yang Maha Tunggal'],
+      ['ٱلْأَحَدُ', 'Al-Ahad', 'Yang Maha Esa'],
+      ['ٱلصَّمَدُ', 'Ash-Shamad', 'Yang Maha Dibutuhkan'],
+      ['ٱلْقَادِرُ', 'Al-Qadir', 'Yang Maha Menentukan'],
+      ['ٱلْمُقْتَدِرُ', 'Al-Muqtadir', 'Yang Maha Berkuasa'],
+      ['ٱلْمُقَدِّمُ', 'Al-Muqaddim', 'Yang Maha Mendahulukan'],
+      ['ٱلْمُؤَخِّرُ', 'Al-Mu\'akhkhir', 'Yang Maha Mengakhirkan'],
+      ['ٱلْأَوَّلُ', 'Al-Awwal', 'Yang Maha Awal'],
+      ['ٱلْآخِرُ', 'Al-Akhir', 'Yang Maha Akhir'],
+      ['ٱلظَّاهِرُ', 'Azh-Zhahir', 'Yang Maha Nyata'],
+      ['ٱلْبَاطِنُ', 'Al-Bathin', 'Yang Maha Tersembunyi'],
+      ['ٱلْوَالِي', 'Al-Wali', 'Yang Maha Memerintah'],
+      ['ٱلْمُتَعَالِي', 'Al-Muta\'ali', 'Yang Maha Tinggi'],
+      ['ٱلْبَرُّ', 'Al-Barr', 'Yang Maha Penderma'],
+      ['ٱلتَّوَّابُ', 'At-Tawwab', 'Yang Maha Penerima Taubat'],
+      ['ٱلْمُنْتَقِمُ', 'Al-Muntaqim', 'Yang Maha Pemberi Balasan'],
+      ['ٱلْعَفُوُّ', 'Al-\'Afuww', 'Yang Maha Pemaaf'],
+      ['ٱلرَّءُوفُ', 'Ar-Ra\'uf', 'Yang Maha Pengasih'],
+      ['مَالِكُ ٱلْمُلْكِ', 'Malikul-Mulk', 'Penguasa Kerajaan Semesta'],
+      ['ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ', 'Dzul-Jalali wal-Ikram', 'Pemilik Kebesaran dan Kemuliaan'],
+      ['ٱلْمُقْسِطُ', 'Al-Muqsith', 'Yang Maha Pemberi Keadilan'],
+      ['ٱلْجَامِعُ', 'Al-Jami\'', 'Yang Maha Mengumpulkan'],
+      ['ٱلْغَنِيُّ', 'Al-Ghaniyy', 'Yang Maha Kaya'],
+      ['ٱلْمُغْنِي', 'Al-Mughni', 'Yang Maha Pemberi Kekayaan'],
+      ['ٱلْمَانِعُ', 'Al-Mani\'', 'Yang Maha Mencegah'],
+      ['ٱلضَّارُّ', 'Adh-Dharr', 'Yang Maha Penimpa Kemudaratan'],
+      ['ٱلنَّافِعُ', 'An-Nafi\'', 'Yang Maha Memberi Manfaat'],
+      ['ٱلنُّورُ', 'An-Nur', 'Yang Maha Bercahaya'],
+      ['ٱلْهَادِي', 'Al-Hadi', 'Yang Maha Pemberi Petunjuk'],
+      ['ٱلْبَدِيعُ', 'Al-Badi\'', 'Yang Maha Pencipta Keindahan'],
+      ['ٱلْبَاقِي', 'Al-Baqi', 'Yang Maha Kekal'],
+      ['ٱلْوَارِثُ', 'Al-Warits', 'Yang Maha Pewaris'],
+      ['ٱلرَّشِيدُ', 'Ar-Rasyid', 'Yang Maha Pandai'],
+      ['ٱلصَّبُورُ', 'Ash-Shabur', 'Yang Maha Sabar']
+    ];
+
+    const ASMAUL_HUSNA = [
+      ...DETAILED_30_NAMES.map(item => ({
+        ...item,
+        stage: Math.ceil(item.order / 15)
+      })),
+      ...REMAINING_69_NAMES.map((item, idx) => {
+        const order = 31 + idx;
+        return {
+          order,
+          stage: Math.ceil(order / 15),
+          arabic: item[0],
+          latin: item[1],
+          meaning: item[2],
+          explanation: `Allah memiliki sifat kesempurnaan ${item[2]} (${item[1]}) yang mutlak dan tidak menyerupai sifat makhluk mana pun. Memahami makna ini menumbuhkan rasa tunduk, harap, dan pengagungan kepada-Nya.`,
+          citations: [
+            { refId: 'ref-ghazali', loc: `Bab Syarh ${item[1]}` },
+            { refId: 'ref-saadi', loc: 'Tafsir Asmaul Husna' }
+          ]
+        };
+      })
+    ];
+
+    /**
+     * =========================================================================
+     * 2. MODUL LOGIKA INTI (PURE FUNCTIONS SESUAI PRD v0.4)
+     * =========================================================================
+     */
+    const STORAGE_KEY = 'asmaul_husna_user_state_v1';
+
+    function getTodayLocalStr() {
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function createDefaultUserState() {
+      return {
+        schemaVersion: 1,
+        profile: {
+          userName: '',
+          targetDays: 30,
+          startedAt: getTodayLocalStr(),
+          onboardingCompleted: false
+        },
+        settings: {
+          learningMode: 'sequential', // 'sequential' | 'random'
+          theme: 'system' // 'light' | 'dark' | 'system'
+        },
+        progress: {
+          unlockedStage: 1, // 1..7
+          points: {}, // { [order]: 0..100 }
+          lastPracticedAt: {}
+        },
+        history: {
+          completedDates: [],
+          lastSession: null
+        }
+      };
+    }
+
+    function loadUserState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return createDefaultUserState();
+        const parsed = JSON.parse(raw);
+        return {
+          ...createDefaultUserState(),
+          ...parsed,
+          profile: { ...createDefaultUserState().profile, ...(parsed.profile || {}) },
+          settings: { ...createDefaultUserState().settings, ...(parsed.settings || {}) },
+          progress: { ...createDefaultUserState().progress, ...(parsed.progress || {}) },
+          history: { ...createDefaultUserState().history, ...(parsed.history || {}) },
+        };
+      } catch (e) {
+        return createDefaultUserState();
+      }
+    }
+
+    function saveUserState(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        console.error('Gagal menyimpan state:', e);
+      }
+    }
+
+    // Status hafalan berdasarkan poin 0-100
+    function getNameStatus(points) {
+      const p = points || 0;
+      if (p >= 100) return { key: 'memorized', label: 'Hafal', colorClass: 'text-emerald-600 dark:text-emerald-400', bgClass: 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800/60', dotColor: '#10b981' };
+      if (p >= 60)  return { key: 'almost', label: 'Hampir hafal', colorClass: 'text-amber-600 dark:text-amber-400', bgClass: 'bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-800/60', dotColor: '#f59e0b' };
+      if (p >= 20)  return { key: 'learning', label: 'Belajar', colorClass: 'text-rose-500 dark:text-rose-400', bgClass: 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800/60', dotColor: '#fb7185' };
+      return { key: 'unlearned', label: 'Belum hafal', colorClass: 'text-stone-400 dark:text-stone-500', bgClass: 'bg-cream-100/70 dark:bg-stone-800/50 border-cream-200 dark:border-stone-800', dotColor: '#a8a29e' };
+    }
+
+    // Render SVG lingkaran progres 4 tahap (kosong, 1/3, 2/3, penuh + centang)
+    function renderStatusCircleSVG(points, size = 18) {
+      const p = points || 0;
+      if (p >= 100) {
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" class="shrink-0 text-emerald-500">
+            <circle cx="12" cy="12" r="10" fill="currentColor"/>
+            <path d="M8 12.5L10.5 15L16 9.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        `;
+      }
+      if (p >= 60) {
+        // Terisi 2/3
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" class="shrink-0 text-amber-500">
+            <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+            <path d="M12 2.5A9.5 9.5 0 1 1 3.77 16.75L12 12V2.5Z" fill="currentColor"/>
+          </svg>
+        `;
+      }
+      if (p >= 20) {
+        // Terisi 1/3
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" class="shrink-0 text-rose-400">
+            <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+            <path d="M12 2.5A9.5 9.5 0 0 1 20.23 16.75L12 12V2.5Z" fill="currentColor"/>
+          </svg>
+        `;
+      }
+      // Kosong (0-19)
+      return `
+        <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" class="shrink-0 text-stone-300 dark:text-stone-600">
+          <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      `;
+    }
+
+    // Hitung rata-rata poin pada tahap tertentu (1..7)
+    function calculateStageAverage(stage, pointsMap) {
+      const stageNames = ASMAUL_HUSNA.filter(n => n.stage === stage);
+      if (stageNames.length === 0) return 0;
+      const sum = stageNames.reduce((acc, n) => acc + (pointsMap[n.order] || 0), 0);
+      return Math.round((sum / stageNames.length) * 10) / 10;
+    }
+
+    // Hitung rata-rata seluruh 99 nama
+    function calculateOverallAverage(pointsMap) {
+      const sum = ASMAUL_HUSNA.reduce((acc, n) => acc + (pointsMap[n.order] || 0), 0);
+      return Math.round((sum / ASMAUL_HUSNA.length) * 10) / 10;
+    }
+
+    // Pemilihan 15 nama untuk sesi drilling sesuai PRD v0.4
+    function selectDrillingNames(userState) {
+      const { learningMode } = userState.settings;
+      const { unlockedStage, points } = userState.progress;
+
+      let pool = [];
+      if (learningMode === 'random') {
+        pool = [...ASMAUL_HUSNA];
+      } else {
+        // Mode Bertahap: ambil dari seluruh nama yang sudah unlock (stage <= unlockedStage)
+        pool = ASMAUL_HUSNA.filter(n => n.stage <= unlockedStage);
+      }
+
+      // Acak dulu agar yang berpoin sama urutannya acak, lalu urutkan dari poin terendah
+      const shuffled = pool
+        .map(item => ({ item, rand: Math.random() }))
+        .sort((a, b) => a.rand - b.rand)
+        .map(x => x.item);
+
+      shuffled.sort((a, b) => (points[a.order] || 0) - (points[b.order] || 0));
+
+      return shuffled.slice(0, 15);
+    }
+
+    // Kalkulasi streak harian & daftar tanggal Senin–Minggu pekan berjalan
+    function getWeeklyStreakData(completedDates) {
+      const completedSet = new Set(completedDates || []);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayStr = getTodayLocalStr();
+
+      // Hitung streak beruntun (dari hari ini atau kemarin mundur ke belakang)
+      let streak = 0;
+      let cursor = new Date(today);
+      if (!completedSet.has(todayStr)) {
+        cursor.setDate(cursor.getDate() - 1);
+      }
+      while (true) {
+        const y = cursor.getFullYear();
+        const m = String(cursor.getMonth() + 1).padStart(2, '0');
+        const d = String(cursor.getDate()).padStart(2, '0');
+        const key = `${y}-${m}-${d}`;
+        if (completedSet.has(key)) {
+          streak++;
+          cursor.setDate(cursor.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+
+      // Rentang Senin - Minggu pada pekan ini
+      const dayOfWeek = today.getDay(); // 0 = Minggu, 1 = Senin, ...
+      const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+      const monday = new Date(today);
+      monday.setDate(today.getDate() + diffToMonday);
+
+      const dayLabels = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+      const weekDays = [];
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const dayNum = String(d.getDate()).padStart(2, '0');
+        const dateStr = `${y}-${m}-${dayNum}`;
+
+        let status = 'upcoming'; // belum tiba
+        if (completedSet.has(dateStr)) {
+          status = 'done'; // sudah drilling
+        } else if (dateStr === todayStr) {
+          status = 'today'; // hari ini (belum drilling)
+        } else if (d < today) {
+          status = 'missed'; // hari lewat belum drilling
+        }
+
+        weekDays.push({
+          label: dayLabels[i],
+          dateNum: d.getDate(),
+          dateStr,
+          status
+        });
+      }
+
+      return { streak, weekDays };
+    }
+
+    // Hitung hari ke-X sejak mulai onboarding
+    function getDayNumber(startedAtStr) {
+      if (!startedAtStr) return 1;
+      const start = new Date(startedAtStr + 'T00:00:00');
+      const now = new Date(getTodayLocalStr() + 'T00:00:00');
+      const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+      return Math.max(1, diff + 1);
+    }
+
+    /**
+     * =========================================================================
+     * 3. STATE APLIKASI & NAVIGASI
+     * =========================================================================
+     */
+    let userState = loadUserState();
+    let currentRoute = userState.profile.onboardingCompleted ? 'dashboard' : 'onboarding';
+    let selectedDetailOrder = 1;
+
+    // State sementara untuk Onboarding
+    let onboardingDraft = {
+      userName: '',
+      learningMode: 'sequential',
+      targetDays: 30,
+      isCustomDays: false
+    };
+
+    // State sesi Drilling aktif
+    let drillingSession = null;
+
+    function applyTheme(theme) {
+      const root = document.documentElement;
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (theme === 'dark' || (theme === 'system' && prefersDark)) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (userState.settings.theme === 'system') {
+        applyTheme('system');
+      }
+    });
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => {
+        el.classList.add('hidden');
+      }, 2400);
+    }
+
+    function openModal({ title, message, actions }) {
+      const backdrop = document.getElementById('modal-backdrop');
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-message').textContent = message;
+      const actionsContainer = document.getElementById('modal-actions');
+      actionsContainer.innerHTML = '';
+
+      actions.forEach(act => {
+        const btn = document.createElement('button');
+        btn.textContent = act.label;
+        btn.className = act.primary
+          ? 'px-4 py-2.5 rounded-2xl text-sm font-semibold bg-rose-500 hover:bg-rose-600 text-white transition cursor-pointer'
+          : 'px-4 py-2.5 rounded-2xl text-sm font-medium bg-cream-200/80 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-cream-300/70 dark:hover:bg-stone-700 transition cursor-pointer';
+        btn.onclick = () => {
+          closeModal();
+          if (act.onClick) act.onClick();
+        };
+        actionsContainer.appendChild(btn);
+      });
+
+      backdrop.classList.remove('hidden');
+      backdrop.classList.add('flex');
+    }
+
+    function closeModal() {
+      const backdrop = document.getElementById('modal-backdrop');
+      backdrop.classList.add('hidden');
+      backdrop.classList.remove('flex');
+    }
+
+    function navigate(route, param = null) {
+      if (route === 'detail' && param !== null) {
+        selectedDetailOrder = param;
+      }
+      currentRoute = route;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      render();
+    }
+
+    /**
+     * =========================================================================
+     * 4. LOGIKA SESI DRILLING INTERAKTIF
+     * =========================================================================
+     */
+    function startNewDrillingSession() {
+      const selected15 = selectDrillingNames(userState);
+      // Bagi menjadi 5 pertanyaan, masing-masing 3 nama
+      const questions = [];
+      for (let i = 0; i < 5; i++) {
+        const chunk = selected15.slice(i * 3, i * 3 + 3);
+        const arabicCards = [...chunk].sort(() => Math.random() - 0.5);
+        const meaningCards = [...chunk].sort(() => Math.random() - 0.5);
+        questions.push({
+          items: chunk,
+          arabicCards,
+          meaningCards,
+          matchedOrders: [], // order yang sudah berhasil dipasangkan (benar atau salah terkunci)
+          results: {} // { [order]: { correct: boolean, chosenMeaningOrder: number } }
+        });
+      }
+
+      drillingSession = {
+        questions,
+        currentQIndex: 0,
+        selectedArabicOrder: null,
+        selectedMeaningOrder: null,
+        feedbackState: null, // null | { isCorrect, arabicOrder, correctMeaning, chosenMeaning }
+        netPoints: 0,
+        correctCount: 0,
+        completed: false,
+        unlockedNewStage: null
+      };
+
+      navigate('drilling-session');
+    }
+
+    function handleSelectArabicCard(order) {
+      if (!drillingSession || drillingSession.feedbackState) return;
+      const q = drillingSession.questions[drillingSession.currentQIndex];
+      if (q.matchedOrders.includes(order)) return;
+
+      drillingSession.selectedArabicOrder =
+        drillingSession.selectedArabicOrder === order ? null : order;
+
+      if (drillingSession.selectedArabicOrder !== null && drillingSession.selectedMeaningOrder !== null) {
+        evaluatePairMatch();
+      } else {
+        render();
+      }
+    }
+
+    function handleSelectMeaningCard(order) {
+      if (!drillingSession || drillingSession.feedbackState) return;
+      const q = drillingSession.questions[drillingSession.currentQIndex];
+      if (q.matchedOrders.includes(order)) return;
+
+      drillingSession.selectedMeaningOrder =
+        drillingSession.selectedMeaningOrder === order ? null : order;
+
+      if (drillingSession.selectedArabicOrder !== null && drillingSession.selectedMeaningOrder !== null) {
+        evaluatePairMatch();
+      } else {
+        render();
+      }
+    }
+
+    function evaluatePairMatch() {
+      const q = drillingSession.questions[drillingSession.currentQIndex];
+      const arabicOrder = drillingSession.selectedArabicOrder;
+      const meaningOrder = drillingSession.selectedMeaningOrder;
+      const isCorrect = arabicOrder === meaningOrder;
+
+      const targetItem = q.items.find(it => it.order === arabicOrder);
+      const chosenItem = q.items.find(it => it.order === meaningOrder);
+
+      // Update poin pada kartu Arab yang dipilih (+20 benar, -5 salah, batas 0..100)
+      const prevPts = userState.progress.points[arabicOrder] || 0;
+      const delta = isCorrect ? 20 : -5;
+      const nextPts = Math.max(0, Math.min(100, prevPts + delta));
+      const actualDelta = nextPts - prevPts;
+
+      userState.progress.points[arabicOrder] = nextPts;
+      userState.progress.lastPracticedAt[arabicOrder] = new Date().toISOString();
+      saveUserState(userState);
+
+      drillingSession.netPoints += delta;
+      if (isCorrect) {
+        drillingSession.correctCount += 1;
+      }
+
+      q.matchedOrders.push(arabicOrder);
+      q.results[arabicOrder] = {
+        isCorrect,
+        chosenMeaning: chosenItem.meaning
+      };
+
+      drillingSession.selectedArabicOrder = null;
+      drillingSession.selectedMeaningOrder = null;
+
+      if (isCorrect) {
+        drillingSession.feedbackState = {
+          isCorrect: true,
+          arabicOrder,
+          arabicText: targetItem.arabic,
+          correctMeaning: targetItem.meaning,
+          delta: actualDelta
+        };
+        render();
+        // Otomatis lanjut setelah jeda singkat bila benar
+        setTimeout(() => {
+          if (!drillingSession) return;
+          drillingSession.feedbackState = null;
+          advanceIfQuestionDone();
+        }, 750);
+      } else {
+        // Jika salah: tampilkan pasangan arti yang benar secara jelas sebelum lanjut
+        drillingSession.feedbackState = {
+          isCorrect: false,
+          arabicOrder,
+          arabicText: targetItem.arabic,
+          latin: targetItem.latin,
+          correctMeaning: targetItem.meaning,
+          chosenMeaning: chosenItem.meaning
+        };
+        render();
+      }
+    }
+
+    function dismissWrongFeedback() {
+      if (!drillingSession) return;
+      drillingSession.feedbackState = null;
+      advanceIfQuestionDone();
+    }
+
+    function advanceIfQuestionDone() {
+      const q = drillingSession.questions[drillingSession.currentQIndex];
+      if (q.matchedOrders.length >= 3) {
+        if (drillingSession.currentQIndex < 4) {
+          drillingSession.currentQIndex += 1;
+          render();
+        } else {
+          finishDrillingSession();
+        }
+      } else {
+        render();
+      }
+    }
+
+    function finishDrillingSession() {
+      const todayStr = getTodayLocalStr();
+      if (!userState.history.completedDates.includes(todayStr)) {
+        userState.history.completedDates.push(todayStr);
+      }
+
+      let unlockedNewStage = null;
+      if (userState.settings.learningMode === 'sequential') {
+        const currStage = userState.progress.unlockedStage;
+        const avg = calculateStageAverage(currStage, userState.progress.points);
+        if (avg >= 80 && currStage < 7) {
+          userState.progress.unlockedStage = currStage + 1;
+          unlockedNewStage = currStage + 1;
+        }
+      }
+
+      const accuracyPercent = Math.round((drillingSession.correctCount / 15) * 100);
+      userState.history.lastSession = {
+        completedAt: new Date().toISOString(),
+        mode: userState.settings.learningMode,
+        netPoints: drillingSession.netPoints,
+        correctCount: drillingSession.correctCount,
+        totalPairs: 15,
+        accuracyPercent,
+        unlockedNewStage
+      };
+
+      saveUserState(userState);
+      drillingSession.completed = true;
+      drillingSession.unlockedNewStage = unlockedNewStage;
+      render();
+    }
+
+    /**
+     * =========================================================================
+     * 5. RENDER HALAMAN (5 HALAMAN UTAMA + SESI DRILLING)
+     * =========================================================================
+     */
+
+    // --- HALAMAN 1: ONBOARDING ---
+    function renderOnboarding() {
+      const presetDays = [30, 60, 90];
+      return `
+        <div class="flex-1 flex flex-col justify-between p-6 page-enter">
+          <div>
+            <!-- Bismillah Header -->
+            <div class="text-center bg-cream-100/90 dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-6">
+              <p class="arabic-text text-2xl sm:text-3xl text-stone-800 dark:text-stone-100 font-bold mb-2">
+                ${META_CONTENT.bismillah.arabic}
+              </p>
+              <p class="text-xs text-stone-500 dark:text-stone-400">
+                ${META_CONTENT.bismillah.translation}
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <h1 class="text-xl font-bold text-stone-800 dark:text-stone-100">Selamat Datang</h1>
+              <p class="text-sm text-stone-500 dark:text-stone-400 mt-1">
+                Siapkan perjalanan menghafal dan memahami 99 Asmaul Husna secara bertahap.
+              </p>
+            </div>
+
+            <!-- Langkah 1: Nama -->
+            <div class="mb-5">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-2">
+                1. Siapa nama Anda?
+              </label>
+              <input
+                id="ob-name"
+                type="text"
+                placeholder="Masukkan nama panggilan Anda..."
+                value="${onboardingDraft.userName}"
+                oninput="onboardingDraft.userName = this.value"
+                class="w-full px-4 py-3.5 rounded-2xl bg-white dark:bg-stone-800 border border-cream-300 dark:border-stone-700 text-sm text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-rose-400 transition"
+              />
+            </div>
+
+            <!-- Langkah 2: Gaya Belajar -->
+            <div class="mb-5">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-2">
+                2. Pilih gaya belajar
+              </label>
+              <div class="grid grid-cols-1 gap-2.5">
+                <button
+                  type="button"
+                  onclick="onboardingDraft.learningMode = 'sequential'; render();"
+                  class="text-left p-4 rounded-2xl border transition cursor-pointer ${
+                    onboardingDraft.learningMode === 'sequential'
+                      ? 'bg-sakura-50 dark:bg-rose-950/30 border-rose-400 ring-1 ring-rose-400'
+                      : 'bg-white dark:bg-stone-800/60 border-cream-200 dark:border-stone-800 hover:border-rose-300'
+                  }"
+                >
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-semibold text-sm text-stone-800 dark:text-stone-100">Bertahap per 15 nama</span>
+                    <span class="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-900/60 text-rose-600 dark:text-rose-300">Rekomendasi</span>
+                  </div>
+                  <p class="text-xs text-stone-500 dark:text-stone-400 leading-relaxed">
+                    Fokus 15 nama dulu. Tahap berikutnya terbuka setelah rata-rata poin mencapai 80.
+                  </p>
+                </button>
+
+                <button
+                  type="button"
+                  onclick="onboardingDraft.learningMode = 'random'; render();"
+                  class="text-left p-4 rounded-2xl border transition cursor-pointer ${
+                    onboardingDraft.learningMode === 'random'
+                      ? 'bg-sakura-50 dark:bg-rose-950/30 border-rose-400 ring-1 ring-rose-400'
+                      : 'bg-white dark:bg-stone-800/60 border-cream-200 dark:border-stone-800 hover:border-rose-300'
+                  }"
+                >
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-semibold text-sm text-stone-800 dark:text-stone-100">Acak semua 99 nama</span>
+                  </div>
+                  <p class="text-xs text-stone-500 dark:text-stone-400 leading-relaxed">
+                    Seluruh 99 nama langsung terbuka. Cocok jika sudah pernah hafal dan ingin menyegarkan ingatan.
+                  </p>
+                </button>
+              </div>
+              <p class="text-[11px] text-stone-400 dark:text-stone-500 mt-1.5">
+                Pilihan ini dapat diubah kapan saja di halaman Setting.
+              </p>
+            </div>
+
+            <!-- Langkah 3: Target Hari -->
+            <div class="mb-6">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-2">
+                3. Target hafalan (jumlah hari)
+              </label>
+              <div class="grid grid-cols-4 gap-2">
+                ${presetDays.map(d => `
+                  <button
+                    type="button"
+                    onclick="onboardingDraft.targetDays = ${d}; onboardingDraft.isCustomDays = false; render();"
+                    class="py-2.5 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
+                      !onboardingDraft.isCustomDays && onboardingDraft.targetDays === d
+                        ? 'bg-rose-400 text-white border-rose-400 shadow-xs'
+                        : 'bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-cream-200 dark:border-stone-700'
+                    }"
+                  >
+                    ${d} Hari
+                  </button>
+                `).join('')}
+                <button
+                  type="button"
+                  onclick="onboardingDraft.isCustomDays = true; render();"
+                  class="py-2.5 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
+                    onboardingDraft.isCustomDays
+                      ? 'bg-rose-400 text-white border-rose-400 shadow-xs'
+                      : 'bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-cream-200 dark:border-stone-700'
+                  }"
+                >
+                  Kustom
+                </button>
+              </div>
+
+              ${onboardingDraft.isCustomDays ? `
+                <div class="mt-2.5 flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    max="365"
+                    value="${onboardingDraft.targetDays}"
+                    oninput="onboardingDraft.targetDays = Math.max(1, parseInt(this.value) || 30)"
+                    class="w-28 px-3.5 py-2.5 rounded-2xl bg-white dark:bg-stone-800 border border-cream-300 dark:border-stone-700 text-sm text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-rose-400"
+                  />
+                  <span class="text-xs text-stone-500 dark:text-stone-400">hari target penyelesaian</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onclick="submitOnboarding()"
+            class="w-full py-4 rounded-2xl bg-rose-400 hover:bg-rose-500 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition cursor-pointer"
+          >
+            Mulai Latihan
+          </button>
+        </div>
+      `;
+    }
+
+    function submitOnboarding() {
+      const name = onboardingDraft.userName.trim();
+      if (!name) {
+        showToast('Silakan isi nama Anda terlebih dahulu');
+        const input = document.getElementById('ob-name');
+        if (input) input.focus();
+        return;
+      }
+      userState.profile.userName = name;
+      userState.profile.targetDays = Math.max(1, onboardingDraft.targetDays || 30);
+      userState.profile.startedAt = getTodayLocalStr();
+      userState.profile.onboardingCompleted = true;
+      userState.settings.learningMode = onboardingDraft.learningMode;
+      saveUserState(userState);
+      navigate('dashboard');
+    }
+
+    // --- HALAMAN 2: DASHBOARD (BERANDA) ---
+    function renderDashboard() {
+      const { streak, weekDays } = getWeeklyStreakData(userState.history.completedDates);
+      const dayNumber = getDayNumber(userState.profile.startedAt);
+      const { points, unlockedStage } = userState.progress;
+      const { learningMode } = userState.settings;
+      const lastSession = userState.history.lastSession;
+
+      // Hitung jumlah nama per status
+      const counts = { memorized: 0, almost: 0, learning: 0, unlearned: 0 };
+      ASMAUL_HUSNA.forEach(n => {
+        const st = getNameStatus(points[n.order] || 0).key;
+        counts[st]++;
+      });
+
+      const currentStageAvg = calculateStageAverage(unlockedStage, points);
+      const overallAvg = calculateOverallAverage(points);
+
+      return `
+        <div class="flex-1 flex flex-col p-5 pb-10 page-enter">
+          <!-- Top Bar -->
+          <header class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-xs text-stone-500 dark:text-stone-400">Assalamu'alaikum,</p>
+              <h1 class="text-xl font-bold text-stone-800 dark:text-stone-100 truncate max-w-[240px]">
+                ${userState.profile.userName}
+              </h1>
+            </div>
+            <button
+              type="button"
+              onclick="navigate('setting')"
+              aria-label="Pengaturan"
+              class="p-3 rounded-2xl bg-cream-100 dark:bg-stone-800 hover:bg-cream-200 dark:hover:bg-stone-700 text-stone-600 dark:text-stone-300 border border-cream-200 dark:border-stone-700 transition cursor-pointer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </button>
+          </header>
+
+          <!-- Card Streak Mingguan -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4 shadow-2xs">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-2xl bg-sakura-50 dark:bg-rose-950/50 border border-rose-200/70 dark:border-rose-800/50 flex items-center justify-center text-rose-500">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C9.5 6 6 8.5 6 13.5C6 17.09 8.91 20 12.5 20C16.09 20 19 17.09 19 13.5C19 10.5 17.5 8 16 6.5C15.8 8.2 14.8 9.2 13.8 9.5C14.5 7 13.5 4 12 2Z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-stone-800 dark:text-stone-100">
+                    ${streak} Hari Beruntun
+                  </p>
+                  <p class="text-xs text-stone-500 dark:text-stone-400">
+                    Target hari ke-${dayNumber} dari ${userState.profile.targetDays} hari
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deretan 7 Hari Senin-Minggu -->
+            <div class="grid grid-cols-7 gap-1.5 text-center">
+              ${weekDays.map(day => {
+                let circleStyle = 'bg-cream-100 dark:bg-stone-800 text-stone-400 dark:text-stone-500 border-transparent';
+                let indicator = `${day.dateNum}`;
+
+                if (day.status === 'done') {
+                  circleStyle = 'bg-rose-400 text-white border-rose-400 font-semibold';
+                  indicator = `✓`;
+                } else if (day.status === 'today') {
+                  circleStyle = 'bg-sakura-50 dark:bg-rose-950/40 text-rose-500 border-rose-400 border-dashed font-bold';
+                } else if (day.status === 'missed') {
+                  circleStyle = 'bg-cream-100/70 dark:bg-stone-800/50 text-stone-400 dark:text-stone-600 border-cream-200 dark:border-stone-700';
+                }
+
+                return `
+                  <div class="flex flex-col items-center gap-1.5">
+                    <span class="text-[11px] font-medium ${day.status === 'today' ? 'text-rose-500 font-semibold' : 'text-stone-400 dark:text-stone-500'}">${day.label}</span>
+                    <div class="w-9 h-9 rounded-full border flex items-center justify-center text-xs ${circleStyle}">
+                      ${indicator}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Card Recap Progres Utama (Klik menuju Halaman Drilling) -->
+          <section
+            onclick="navigate('drilling')"
+            class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 hover:border-rose-300 dark:hover:border-rose-700/70 rounded-3xl p-5 mb-4 shadow-2xs transition cursor-pointer group"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-semibold uppercase tracking-wider text-rose-500">
+                ${learningMode === 'sequential' ? `Mode Bertahap • Tahap ${unlockedStage} dari 7` : 'Mode Acak • 99 Nama Terbuka'}
+              </span>
+              <span class="text-xs text-stone-400 group-hover:text-rose-500 transition flex items-center gap-1">
+                Buka Drilling
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </div>
+
+            <!-- Total Hafal dari 99 -->
+            <div class="flex items-end justify-between mb-2">
+              <div>
+                <span class="text-3xl font-bold text-stone-800 dark:text-stone-100">${counts.memorized}</span>
+                <span class="text-sm text-stone-500 dark:text-stone-400"> / 99 nama hafal</span>
+              </div>
+              <div class="text-right">
+                <p class="text-xs text-stone-500 dark:text-stone-400">
+                  ${learningMode === 'sequential' ? `Rata-rata Tahap ${unlockedStage}` : 'Rata-rata Total'}
+                </p>
+                <p class="text-sm font-bold text-stone-800 dark:text-stone-100">
+                  ${learningMode === 'sequential' ? `${currentStageAvg} / 80` : `${overallAvg} / 100`}
+                </p>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full h-2.5 bg-cream-200 dark:bg-stone-700 rounded-full overflow-hidden mb-5">
+              <div
+                class="h-full bg-rose-400 rounded-full transition-all duration-500"
+                style="width: ${learningMode === 'sequential' ? Math.min(100, (currentStageAvg / 80) * 100) : overallAvg}%"
+              ></div>
+            </div>
+
+            <!-- Ringkasan 4 Status -->
+            <div class="grid grid-cols-2 gap-2.5 mb-4">
+              <div class="p-3 rounded-2xl bg-cream-100/80 dark:bg-stone-900/60 border border-cream-200/70 dark:border-stone-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  ${renderStatusCircleSVG(0, 16)}
+                  <span class="text-xs text-stone-600 dark:text-stone-300">Belum hafal</span>
+                </div>
+                <span class="text-xs font-bold text-stone-800 dark:text-stone-100">${counts.unlearned}</span>
+              </div>
+
+              <div class="p-3 rounded-2xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-900/40 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  ${renderStatusCircleSVG(30, 16)}
+                  <span class="text-xs text-stone-600 dark:text-stone-300">Belajar</span>
+                </div>
+                <span class="text-xs font-bold text-stone-800 dark:text-stone-100">${counts.learning}</span>
+              </div>
+
+              <div class="p-3 rounded-2xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/40 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  ${renderStatusCircleSVG(70, 16)}
+                  <span class="text-xs text-stone-600 dark:text-stone-300">Hampir hafal</span>
+                </div>
+                <span class="text-xs font-bold text-stone-800 dark:text-stone-100">${counts.almost}</span>
+              </div>
+
+              <div class="p-3 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/40 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  ${renderStatusCircleSVG(100, 16)}
+                  <span class="text-xs text-stone-600 dark:text-stone-300">Hafal</span>
+                </div>
+                <span class="text-xs font-bold text-stone-800 dark:text-stone-100">${counts.memorized}</span>
+              </div>
+            </div>
+
+            <!-- Info Drilling Terakhir atau Ajakan Mulai -->
+            <div class="pt-3.5 border-t border-cream-200/80 dark:border-stone-800">
+              ${lastSession ? `
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-stone-500 dark:text-stone-400">
+                    Drilling terakhir (${new Date(lastSession.completedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })})
+                  </span>
+                  <span class="font-semibold text-stone-700 dark:text-stone-200">
+                    ${lastSession.netPoints >= 0 ? '+' : ''}${lastSession.netPoints} poin • Akurasi ${lastSession.accuracyPercent}%
+                  </span>
+                </div>
+              ` : `
+                <p class="text-xs text-stone-500 dark:text-stone-400 text-center">
+                  Belum ada sesi drilling. Mulai sesi pertama (5 pertanyaan) hari ini.
+                </p>
+              `}
+            </div>
+          </section>
+
+          <!-- Tombol Aksi Cepat ke Halaman Drilling -->
+          <button
+            type="button"
+            onclick="navigate('drilling')"
+            class="w-full py-4 rounded-2xl bg-rose-400 hover:bg-rose-500 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition cursor-pointer mt-auto"
+          >
+            Lanjut ke Halaman Drilling
+          </button>
+        </div>
+      `;
+    }
+
+    // --- HALAMAN 3: HALAMAN DRILLING + GRID 99 NAMA ---
+    function renderDrillingPage() {
+      const { learningMode } = userState.settings;
+      const { unlockedStage, points } = userState.progress;
+      const stageAvg = calculateStageAverage(unlockedStage, points);
+      const overallAvg = calculateOverallAverage(points);
+      const memorizedCount = ASMAUL_HUSNA.filter(n => (points[n.order] || 0) >= 100).length;
+
+      return `
+        <div class="flex-1 flex flex-col p-5 pb-10 page-enter">
+          <!-- Header Navigasi -->
+          <header class="flex items-center gap-3 mb-5">
+            <button
+              type="button"
+              onclick="navigate('dashboard')"
+              aria-label="Kembali ke Dashboard"
+              class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 hover:bg-cream-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 border border-cream-200 dark:border-stone-700 transition cursor-pointer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div>
+              <h1 class="text-lg font-bold text-stone-800 dark:text-stone-100">Drilling Hafalan</h1>
+              <p class="text-xs text-stone-500 dark:text-stone-400">5 pertanyaan • 15 pasangan nama</p>
+            </div>
+          </header>
+
+          <!-- Ringkasan Progres Sesuai Mode Aktif -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-5 shadow-2xs">
+            ${learningMode === 'sequential' ? `
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-500">
+                  Tahap ${unlockedStage} dari 7
+                </span>
+                <span class="text-xs text-stone-500 dark:text-stone-400">
+                  Ambang buka tahap: ≥ 80
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between mb-3">
+                <p class="text-sm text-stone-600 dark:text-stone-300">
+                  Rata-rata poin Tahap ${unlockedStage}
+                </p>
+                <p class="text-2xl font-bold text-stone-800 dark:text-stone-100">
+                  ${stageAvg} <span class="text-xs font-normal text-stone-400">/ 100</span>
+                </p>
+              </div>
+              <div class="w-full h-2.5 bg-cream-200 dark:bg-stone-700 rounded-full overflow-hidden mb-3">
+                <div class="h-full bg-rose-400 rounded-full transition-all" style="width: ${Math.min(100, (stageAvg / 80) * 100)}%"></div>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-stone-400">
+                Soal diambil acak dari ${unlockedStage === 7 ? '99' : unlockedStage * 15} nama yang sudah terbuka dengan prioritas poin terendah.
+              </p>
+            ` : `
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-rose-500">
+                  Mode Acak (99 Nama Terbuka)
+                </span>
+                <span class="text-xs text-stone-500 dark:text-stone-400">
+                  ${memorizedCount}/99 hafal
+                </span>
+              </div>
+              <div class="flex items-baseline justify-between mb-3">
+                <p class="text-sm text-stone-600 dark:text-stone-300">
+                  Rata-rata poin keseluruhan
+                </p>
+                <p class="text-2xl font-bold text-stone-800 dark:text-stone-100">
+                  ${overallAvg} <span class="text-xs font-normal text-stone-400">/ 100</span>
+                </p>
+              </div>
+              <div class="w-full h-2.5 bg-cream-200 dark:bg-stone-700 rounded-full overflow-hidden mb-3">
+                <div class="h-full bg-rose-400 rounded-full transition-all" style="width: ${overallAvg}%"></div>
+              </div>
+              <p class="text-xs text-stone-500 dark:text-stone-400">
+                Soal diacak dari seluruh 99 nama dengan prioritas poin terendah lebih dulu.
+              </p>
+            `}
+
+            <button
+              type="button"
+              onclick="startNewDrillingSession()"
+              class="w-full mt-4 py-3.5 rounded-2xl bg-rose-400 hover:bg-rose-500 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition cursor-pointer"
+            >
+              Mulai Drilling
+            </button>
+          </section>
+
+          <!-- Grid 99 Nama -->
+          <section class="mb-6">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-sm font-bold text-stone-800 dark:text-stone-100">Daftar 99 Asmaul Husna</h2>
+              <span class="text-[11px] text-stone-400 dark:text-stone-500">Ketuk kartu untuk makna & referensi</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5">
+              ${ASMAUL_HUSNA.map(item => {
+                const pts = points[item.order] || 0;
+                const isLocked = learningMode === 'sequential' && item.stage > unlockedStage;
+                const st = getNameStatus(pts);
+
+                return `
+                  <button
+                    type="button"
+                    onclick="navigate('detail', ${item.order})"
+                    class="relative text-left p-3 rounded-2xl border transition flex flex-col justify-between min-h-[112px] cursor-pointer ${
+                      isLocked
+                        ? 'bg-cream-100/50 dark:bg-stone-900/40 border-cream-200/70 dark:border-stone-800/70 opacity-65 hover:opacity-90'
+                        : 'bg-white dark:bg-stone-800/80 border-cream-200 dark:border-stone-800 hover:border-rose-300 dark:hover:border-rose-700/70 shadow-2xs'
+                    }"
+                  >
+                    <!-- Baris Atas: Nomor + Gembok/Status -->
+                    <div class="w-full flex items-center justify-between mb-1">
+                      <span class="text-[10px] font-semibold text-stone-400 dark:text-stone-500">${item.order}</span>
+                      ${isLocked ? `
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-stone-400">
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                      ` : renderStatusCircleSVG(pts, 15)}
+                    </div>
+
+                    <!-- Tengah: Tulisan Arab -->
+                    <p class="arabic-text text-xl text-center text-stone-800 dark:text-stone-100 font-bold my-0.5 leading-snug">
+                      ${item.arabic}
+                    </p>
+
+                    <!-- Bawah: Arti singkat & Poin -->
+                    <div class="w-full mt-1">
+                      <p class="text-[11px] font-medium text-stone-600 dark:text-stone-300 truncate text-center">
+                        ${item.meaning}
+                      </p>
+                      <p class="text-[10px] text-center mt-0.5 font-semibold ${st.colorClass}">
+                        ${pts} poin
+                      </p>
+                    </div>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </section>
+
+          <!-- Catatan Transparansi Riwayat Hadis (PRD Bagian 8) -->
+          <footer class="p-4 rounded-2xl bg-cream-100/90 dark:bg-stone-800/50 border border-cream-200 dark:border-stone-800">
+            <p class="text-[11px] text-stone-500 dark:text-stone-400 leading-relaxed">
+              ${META_CONTENT.hadithNote}
+            </p>
+          </footer>
+        </div>
+      `;
+    }
+
+    // --- HALAMAN 3B: SESI DRILLING INTERAKTIF (5 PERTANYAAN & SUMMARY) ---
+    function renderDrillingSession() {
+      if (!drillingSession) {
+        navigate('drilling');
+        return '';
+      }
+
+      // Layar Summary setelah pertanyaan ke-5 selesai
+      if (drillingSession.completed) {
+        const accuracyPercent = Math.round((drillingSession.correctCount / 15) * 100);
+        const net = drillingSession.netPoints;
+        const newStage = drillingSession.unlockedNewStage;
+        const stageRangeStart = newStage ? (newStage - 1) * 15 + 1 : 0;
+        const stageRangeEnd = newStage ? (newStage === 7 ? 99 : newStage * 15) : 0;
+
+        return `
+          <div class="flex-1 flex flex-col justify-between p-6 page-enter">
+            <div class="my-auto text-center">
+              <div class="w-16 h-16 rounded-3xl bg-sakura-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-500 flex items-center justify-center mx-auto mb-5">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+
+              <h1 class="text-2xl font-bold text-stone-800 dark:text-stone-100 mb-1">Sesi Drilling Selesai</h1>
+              <p class="text-sm text-stone-500 dark:text-stone-400 mb-6">
+                Alhamdulillah, Anda telah menyelesaikan 15 pasangan nama.
+              </p>
+
+              <!-- Notifikasi Buka Tahap Baru (jika tercapai >= 80) -->
+              ${newStage ? `
+                <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/70 mb-5 text-left">
+                  <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">
+                    Tahap Baru Terbuka
+                  </p>
+                  <p class="text-sm font-semibold text-stone-800 dark:text-stone-100">
+                    Tahap ${newStage} terbuka (Nama ${stageRangeStart}–${stageRangeEnd})
+                  </p>
+                  <p class="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
+                    Rata-rata poin tahap sebelumnya telah mencapai ≥ 80.
+                  </p>
+                </div>
+              ` : ''}
+
+              <!-- Kartu Statistik Summary -->
+              <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="p-4 rounded-3xl bg-white dark:bg-stone-800/80 border border-cream-200 dark:border-stone-800">
+                  <p class="text-xs text-stone-500 dark:text-stone-400 mb-1">Poin Bersih Sesi</p>
+                  <p class="text-2xl font-bold ${net >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">
+                    ${net >= 0 ? '+' : ''}${net}
+                  </p>
+                </div>
+                <div class="p-4 rounded-3xl bg-white dark:bg-stone-800/80 border border-cream-200 dark:border-stone-800">
+                  <p class="text-xs text-stone-500 dark:text-stone-400 mb-1">Akurasi Jawaban</p>
+                  <p class="text-2xl font-bold text-stone-800 dark:text-stone-100">
+                    ${accuracyPercent}%
+                  </p>
+                  <p class="text-[11px] text-stone-400 mt-0.5">${drillingSession.correctCount}/15 benar</p>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onclick="drillingSession = null; navigate('drilling');"
+              class="w-full py-4 rounded-2xl bg-rose-400 hover:bg-rose-500 active:scale-[0.99] text-white font-semibold text-sm shadow-sm transition cursor-pointer"
+            >
+              Kembali ke Halaman Drilling
+            </button>
+          </div>
+        `;
+      }
+
+      // Layar Pertanyaan Aktif (1/5 .. 5/5)
+      const qIdx = drillingSession.currentQIndex;
+      const q = drillingSession.questions[qIdx];
+      const fb = drillingSession.feedbackState;
+
+      return `
+        <div class="flex-1 flex flex-col p-5 pb-8 page-enter">
+          <!-- Header Progres Pertanyaan -->
+          <header class="flex items-center justify-between mb-4">
+            <button
+              type="button"
+              onclick="confirmExitDrilling()"
+              class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 border border-cream-200 dark:border-stone-700 cursor-pointer"
+              aria-label="Keluar Sesi"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <div class="flex-1 mx-4">
+              <div class="flex justify-between text-xs font-semibold text-stone-600 dark:text-stone-300 mb-1.5">
+                <span>Pertanyaan ${qIdx + 1} dari 5</span>
+                <span class="text-rose-500">${drillingSession.netPoints >= 0 ? '+' : ''}${drillingSession.netPoints} poin</span>
+              </div>
+              <div class="w-full h-2 bg-cream-200 dark:bg-stone-800 rounded-full overflow-hidden">
+                <div class="h-full bg-rose-400 rounded-full transition-all duration-300" style="width: ${((qIdx + (q.matchedOrders.length / 3)) / 5) * 100}%"></div>
+              </div>
+            </div>
+          </header>
+
+          <p class="text-xs text-center text-stone-500 dark:text-stone-400 mb-4">
+            Pilih 1 lafaz Arab lalu pasangkan dengan artinya yang sesuai
+          </p>
+
+          <!-- Area 6 Kartu: 3 Kartu Arab (Atas) & 3 Kartu Arti (Bawah) -->
+          <div class="flex-1 flex flex-col justify-center gap-5">
+            <!-- Kelompok 3 Kartu Arab -->
+            <div>
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2">
+                Lafaz Arab
+              </span>
+              <div class="grid grid-cols-3 gap-2.5">
+                ${q.arabicCards.map(card => {
+                  const isMatched = q.matchedOrders.includes(card.order);
+                  const res = q.results[card.order];
+                  const isSelected = drillingSession.selectedArabicOrder === card.order;
+
+                  let cardStyle = 'bg-white dark:bg-stone-800 border-cream-200 dark:border-stone-700 text-stone-800 dark:text-stone-100 hover:border-rose-300';
+                  if (isMatched) {
+                    cardStyle = res && res.isCorrect
+                      ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 opacity-75 cursor-default'
+                      : 'bg-rose-50/80 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-300 opacity-75 cursor-default';
+                  } else if (isSelected) {
+                    cardStyle = 'bg-sakura-50 dark:bg-rose-950/50 border-rose-400 ring-2 ring-rose-400/50 text-stone-900 dark:text-white scale-[1.02]';
+                  }
+
+                  return `
+                    <button
+                      type="button"
+                      ${isMatched ? 'disabled' : ''}
+                      onclick="handleSelectArabicCard(${card.order})"
+                      class="relative p-3 min-h-[96px] rounded-2xl border transition flex flex-col items-center justify-center shadow-2xs cursor-pointer ${cardStyle}"
+                    >
+                      ${isMatched ? `
+                        <span class="absolute top-2 right-2 text-xs font-bold ${res && res.isCorrect ? 'text-emerald-500' : 'text-rose-500'}">
+                          ${res && res.isCorrect ? '✓' : '✕'}
+                        </span>
+                      ` : ''}
+                      <span class="arabic-text text-2xl font-bold text-center leading-normal">
+                        ${card.arabic}
+                      </span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Kelompok 3 Kartu Arti -->
+            <div>
+              <span class="block text-[11px] font-semibold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2">
+                Arti Nama
+              </span>
+              <div class="grid grid-cols-1 gap-2.5">
+                ${q.meaningCards.map(card => {
+                  const isMatched = q.matchedOrders.includes(card.order);
+                  const res = q.results[card.order];
+                  const isSelected = drillingSession.selectedMeaningOrder === card.order;
+
+                  let cardStyle = 'bg-white dark:bg-stone-800 border-cream-200 dark:border-stone-700 text-stone-700 dark:text-stone-200 hover:border-rose-300';
+                  if (isMatched) {
+                    cardStyle = res && res.isCorrect
+                      ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 opacity-75 cursor-default'
+                      : 'bg-cream-100 dark:bg-stone-800/40 border-cream-200 dark:border-stone-800 text-stone-400 opacity-65 cursor-default';
+                  } else if (isSelected) {
+                    cardStyle = 'bg-sakura-50 dark:bg-rose-950/50 border-rose-400 ring-2 ring-rose-400/50 text-stone-900 dark:text-white';
+                  }
+
+                  return `
+                    <button
+                      type="button"
+                      ${isMatched ? 'disabled' : ''}
+                      onclick="handleSelectMeaningCard(${card.order})"
+                      class="w-full px-4 py-3.5 rounded-2xl border text-left transition flex items-center justify-between shadow-2xs cursor-pointer ${cardStyle}"
+                    >
+                      <span class="text-sm font-medium">${card.meaning}</span>
+                      ${isMatched ? `
+                        <span class="text-xs font-bold ${res && res.isCorrect ? 'text-emerald-500' : 'text-stone-400'}">
+                          ${res && res.isCorrect ? '✓ +20' : 'Terkunci'}
+                        </span>
+                      ` : ''}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel Umpan Balik Jika Salah (Wajib menampilkan jawaban benar sebelum lanjut) -->
+          ${fb && !fb.isCorrect ? `
+            <div class="mt-4 p-4 rounded-3xl bg-rose-50 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 animate-shake">
+              <div class="flex items-start justify-between gap-3 mb-2">
+                <div>
+                  <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+                    Kurang Tepat (-5 poin)
+                  </span>
+                  <p class="text-xs text-stone-600 dark:text-stone-300 mt-0.5">
+                    Arti yang benar untuk <strong class="font-semibold">${fb.latin}</strong> adalah:
+                  </p>
+                </div>
+                <span class="arabic-text text-2xl font-bold text-stone-800 dark:text-stone-100">${fb.arabicText}</span>
+              </div>
+              <div class="p-3 rounded-2xl bg-white dark:bg-stone-900 border border-rose-200 dark:border-rose-800/70 mb-3">
+                <p class="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                  ✓ ${fb.correctMeaning}
+                </p>
+              </div>
+              <button
+                type="button"
+                onclick="dismissWrongFeedback()"
+                class="w-full py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-semibold transition cursor-pointer"
+              >
+                Mengerti, Lanjutkan
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function confirmExitDrilling() {
+      openModal({
+        title: 'Keluar dari Sesi Drilling?',
+        message: 'Poin dari pasangan yang sudah dijawab tetap tersimpan, namun sesi ini tidak akan dihitung ke dalam streak harian.',
+        actions: [
+          { label: 'Lanjut Latihan', primary: false },
+          {
+            label: 'Keluar',
+            primary: true,
+            onClick: () => {
+              drillingSession = null;
+              navigate('drilling');
+            }
+          }
+        ]
+      });
+    }
+
+    // --- HALAMAN 4: DETAIL NAMA ---
+    function renderDetailName() {
+      const item = ASMAUL_HUSNA.find(n => n.order === selectedDetailOrder) || ASMAUL_HUSNA[0];
+      const pts = userState.progress.points[item.order] || 0;
+      const st = getNameStatus(pts);
+      const isLocked = userState.settings.learningMode === 'sequential' && item.stage > userState.progress.unlockedStage;
+
+      return `
+        <div class="flex-1 flex flex-col p-5 pb-10 page-enter">
+          <!-- Header Navigasi -->
+          <header class="flex items-center justify-between mb-5">
+            <button
+              type="button"
+              onclick="navigate('drilling')"
+              class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 hover:bg-cream-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 border border-cream-200 dark:border-stone-700 transition cursor-pointer"
+              aria-label="Kembali"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+
+            <span class="text-xs font-semibold text-stone-500 dark:text-stone-400">
+              Urutan ke-${item.order} • Tahap ${item.stage}
+            </span>
+
+            <div class="flex gap-1.5">
+              <button
+                type="button"
+                ${item.order <= 1 ? 'disabled' : ''}
+                onclick="navigate('detail', ${Math.max(1, item.order - 1)})"
+                class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 border border-cream-200 dark:border-stone-700 disabled:opacity-40 cursor-pointer"
+                aria-label="Nama Sebelumnya"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button
+                type="button"
+                ${item.order >= 99 ? 'disabled' : ''}
+                onclick="navigate('detail', ${Math.min(99, item.order + 1)})"
+                class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 border border-cream-200 dark:border-stone-700 disabled:opacity-40 cursor-pointer"
+                aria-label="Nama Berikutnya"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </header>
+
+          <!-- Kartu Utama Arab, Latin, Arti, & Poin -->
+          <section class="bg-white dark:bg-stone-800/80 border border-cream-200 dark:border-stone-800 rounded-3xl p-6 text-center mb-4 shadow-2xs">
+            ${isLocked ? `
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-100 dark:bg-stone-800 text-stone-500 text-xs font-medium mb-3">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Tahap ${item.stage} Belum Terbuka di Mode Bertahap
+              </div>
+            ` : ''}
+
+            <p class="arabic-text text-5xl font-bold text-stone-800 dark:text-stone-100 my-3 leading-relaxed">
+              ${item.arabic}
+            </p>
+            <h1 class="text-xl font-bold text-stone-800 dark:text-stone-100">
+              ${item.latin}
+            </h1>
+            <p class="text-sm font-medium text-rose-500 mt-1 mb-5">
+              ${item.meaning}
+            </p>
+
+            <!-- Lencana Poin & Status -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl border ${st.bgClass}">
+              ${renderStatusCircleSVG(pts, 18)}
+              <span class="text-xs font-bold ${st.colorClass}">${st.label}</span>
+              <span class="text-xs text-stone-400">•</span>
+              <span class="text-xs font-bold text-stone-700 dark:text-stone-200">${pts} / 100 poin</span>
+            </div>
+          </section>
+
+          <!-- Penjelasan Makna -->
+          <section class="bg-white dark:bg-stone-800/80 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4 shadow-2xs">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2">
+              Penjelasan Makna
+            </h2>
+            <p class="text-sm text-stone-700 dark:text-stone-200 leading-relaxed">
+              ${item.explanation}
+            </p>
+          </section>
+
+          <!-- Daftar Referensi -->
+          <section class="bg-white dark:bg-stone-800/80 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 shadow-2xs">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-3">
+              Referensi Keilmuan
+            </h2>
+            <ul class="space-y-2.5">
+              ${item.citations.map(cit => {
+                const ref = REFERENCES[cit.refId];
+                return `
+                  <li class="p-3 rounded-2xl bg-cream-100/80 dark:bg-stone-900/70 border border-cream-200/70 dark:border-stone-800">
+                    <p class="text-xs font-bold text-stone-800 dark:text-stone-100">${ref ? ref.title : cit.refId}</p>
+                    <p class="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
+                      ${ref && ref.author ? `${ref.author} • ` : ''}${cit.loc}
+                    </p>
+                  </li>
+                `;
+              }).join('')}
+            </ul>
+          </section>
+        </div>
+      `;
+    }
+
+    // --- HALAMAN 5: SETTING ---
+    function renderSetting() {
+      const { userName, targetDays } = userState.profile;
+      const { learningMode, theme } = userState.settings;
+      const presetDays = [30, 60, 90];
+
+      return `
+        <div class="flex-1 flex flex-col p-5 pb-10 page-enter">
+          <!-- Header Navigasi -->
+          <header class="flex items-center gap-3 mb-6">
+            <button
+              type="button"
+              onclick="navigate('dashboard')"
+              aria-label="Kembali ke Dashboard"
+              class="p-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 hover:bg-cream-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-200 border border-cream-200 dark:border-stone-700 transition cursor-pointer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <h1 class="text-lg font-bold text-stone-800 dark:text-stone-100">Pengaturan</h1>
+          </header>
+
+          <!-- 1. Ganti Nama -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4">
+            <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2">
+              Nama Pengguna
+            </label>
+            <div class="flex gap-2">
+              <input
+                id="setting-name-input"
+                type="text"
+                value="${userName}"
+                class="flex-1 px-4 py-3 rounded-2xl bg-cream-50 dark:bg-stone-900 border border-cream-300 dark:border-stone-700 text-sm text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-rose-400"
+              />
+              <button
+                type="button"
+                onclick="updateUserName()"
+                class="px-4 py-3 rounded-2xl bg-rose-400 hover:bg-rose-500 text-white text-xs font-semibold transition cursor-pointer"
+              >
+                Simpan
+              </button>
+            </div>
+          </section>
+
+          <!-- 2. Metode Hafalan Global -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4">
+            <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-1">
+              Metode Hafalan
+            </label>
+            <p class="text-xs text-stone-500 dark:text-stone-400 mb-3">
+              Mengubah tampilan gembok pada grid 99 nama dan aturan pengambilan soal drilling tanpa menghapus poin hafalan Anda.
+            </p>
+
+            <div class="grid grid-cols-1 gap-2.5">
+              <button
+                type="button"
+                onclick="changeLearningMode('sequential')"
+                class="text-left p-3.5 rounded-2xl border transition cursor-pointer ${
+                  learningMode === 'sequential'
+                    ? 'bg-sakura-50 dark:bg-rose-950/30 border-rose-400 ring-1 ring-rose-400'
+                    : 'bg-cream-50/70 dark:bg-stone-900/60 border-cream-200 dark:border-stone-800'
+                }"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-semibold text-stone-800 dark:text-stone-100">Bertahap (per 15 nama)</span>
+                  ${learningMode === 'sequential' ? '<span class="text-xs font-bold text-rose-500">Aktif</span>' : ''}
+                </div>
+                <p class="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
+                  Membuka bertahap per 15 nama saat rata-rata poin tahap terbaru ≥ 80.
+                </p>
+              </button>
+
+              <button
+                type="button"
+                onclick="changeLearningMode('random')"
+                class="text-left p-3.5 rounded-2xl border transition cursor-pointer ${
+                  learningMode === 'random'
+                    ? 'bg-sakura-50 dark:bg-rose-950/30 border-rose-400 ring-1 ring-rose-400'
+                    : 'bg-cream-50/70 dark:bg-stone-900/60 border-cream-200 dark:border-stone-800'
+                }"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-semibold text-stone-800 dark:text-stone-100">Acak (semua 99 nama)</span>
+                  ${learningMode === 'random' ? '<span class="text-xs font-bold text-rose-500">Aktif</span>' : ''}
+                </div>
+                <p class="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
+                  Semua 99 nama langsung terbuka dan diacak berdasarkan poin terendah.
+                </p>
+              </button>
+            </div>
+          </section>
+
+          <!-- 3. Target Hari Hafalan -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4">
+            <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2">
+              Target Hafalan (Hari)
+            </label>
+            <div class="grid grid-cols-3 gap-2 mb-2.5">
+              ${presetDays.map(d => `
+                <button
+                  type="button"
+                  onclick="updateTargetDays(${d})"
+                  class="py-2.5 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
+                    targetDays === d
+                      ? 'bg-rose-400 text-white border-rose-400'
+                      : 'bg-cream-50 dark:bg-stone-900 text-stone-700 dark:text-stone-300 border-cream-200 dark:border-stone-700'
+                  }"
+                >
+                  ${d} Hari
+                </button>
+              `).join('')}
+            </div>
+            <div class="flex items-center gap-2">
+              <input
+                id="setting-target-days"
+                type="number"
+                min="1"
+                max="365"
+                value="${targetDays}"
+                class="w-28 px-3.5 py-2.5 rounded-2xl bg-cream-50 dark:bg-stone-900 border border-cream-300 dark:border-stone-700 text-sm text-stone-800 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-rose-400"
+              />
+              <button
+                type="button"
+                onclick="updateTargetDays(parseInt(document.getElementById('setting-target-days').value))"
+                class="px-4 py-2.5 rounded-2xl bg-cream-200/80 dark:bg-stone-700 text-stone-700 dark:text-stone-200 text-xs font-semibold cursor-pointer"
+              >
+                Terapkan Kustom
+              </button>
+            </div>
+          </section>
+
+          <!-- 4. Tema Tampilan -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-4">
+            <label class="block text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-2.5">
+              Tema Tampilan
+            </label>
+            <div class="grid grid-cols-3 gap-2">
+              ${[
+                { key: 'light', label: 'Terang' },
+                { key: 'dark', label: 'Gelap' },
+                { key: 'system', label: 'Sistem' }
+              ].map(t => `
+                <button
+                  type="button"
+                  onclick="changeTheme('${t.key}')"
+                  class="py-2.5 rounded-2xl text-xs font-semibold border transition cursor-pointer ${
+                    theme === t.key
+                      ? 'bg-rose-400 text-white border-rose-400'
+                      : 'bg-cream-50 dark:bg-stone-900 text-stone-700 dark:text-stone-300 border-cream-200 dark:border-stone-700'
+                  }"
+                >
+                  ${t.label}
+                </button>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 5. Reset Progress -->
+          <section class="bg-white dark:bg-stone-800/70 border border-cream-200 dark:border-stone-800 rounded-3xl p-5 mb-6">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-stone-400 dark:text-stone-500 mb-1">
+              Data Progres
+            </h2>
+            <p class="text-xs text-stone-500 dark:text-stone-400 mb-3">
+              Menghapus seluruh poin nama, tahap terbuka, streak, dan riwayat drilling. Nama, mode, target, dan tema tetap disimpan.
+            </p>
+            <button
+              type="button"
+              onclick="confirmResetProgress()"
+              class="w-full py-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-800/70 text-xs font-semibold transition cursor-pointer"
+            >
+              Reset Progress Hafalan
+            </button>
+          </section>
+
+          <!-- Versi Aplikasi -->
+          <p class="text-center text-xs text-stone-400 dark:text-stone-500 mt-auto">
+            ${META_CONTENT.version}
+          </p>
+        </div>
+      `;
+    }
+
+    function updateUserName() {
+      const input = document.getElementById('setting-name-input');
+      const val = (input ? input.value : '').trim();
+      if (!val) {
+        showToast('Nama tidak boleh kosong');
+        return;
+      }
+      userState.profile.userName = val;
+      saveUserState(userState);
+      showToast('Nama berhasil diperbarui');
+      render();
+    }
+
+    function changeLearningMode(mode) {
+      userState.settings.learningMode = mode;
+      saveUserState(userState);
+      showToast(mode === 'sequential' ? 'Mode Bertahap diaktifkan' : 'Mode Acak diaktifkan');
+      render();
+    }
+
+    function updateTargetDays(days) {
+      if (!days || days < 1) {
+        showToast('Masukkan jumlah hari minimal 1');
+        return;
+      }
+      userState.profile.targetDays = Math.min(365, days);
+      saveUserState(userState);
+      showToast(`Target diubah menjadi ${userState.profile.targetDays} hari`);
+      render();
+    }
+
+    function changeTheme(theme) {
+      userState.settings.theme = theme;
+      saveUserState(userState);
+      applyTheme(theme);
+      render();
+    }
+
+    function confirmResetProgress() {
+      openModal({
+        title: 'Reset Seluruh Progres?',
+        message: 'Semua poin hafalan (0–100), tahap terbuka, streak harian, dan riwayat drilling akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.',
+        actions: [
+          { label: 'Batal', primary: false },
+          {
+            label: 'Ya, Reset Progres',
+            primary: true,
+            onClick: () => {
+              userState.progress = {
+                unlockedStage: 1,
+                points: {},
+                lastPracticedAt: {}
+              };
+              userState.history = {
+                completedDates: [],
+                lastSession: null
+              };
+              saveUserState(userState);
+              showToast('Progres hafalan berhasil direset');
+              render();
+            }
+          }
+        ]
+      });
+    }
+
+    /**
+     * =========================================================================
+     * 6. ROOT RENDERER & INISIALISASI
+     * =========================================================================
+     */
+    function render() {
+      const appEl = document.getElementById('app');
+      let html = '';
+
+      switch (currentRoute) {
+        case 'onboarding':
+          html = renderOnboarding();
+          break;
+        case 'dashboard':
+          html = renderDashboard();
+          break;
+        case 'drilling':
+          html = renderDrillingPage();
+          break;
+        case 'drilling-session':
+          html = renderDrillingSession();
+          break;
+        case 'detail':
+          html = renderDetailName();
+          break;
+        case 'setting':
+          html = renderSetting();
+          break;
+        default:
+          html = renderDashboard();
+      }
+
+      appEl.innerHTML = html;
+    }
+
+    window.onload = function () {
+      applyTheme(userState.settings.theme);
+      render();
+    };
+  </script>
+</body>
+</html>

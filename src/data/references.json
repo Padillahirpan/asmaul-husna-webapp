@@ -1,0 +1,50 @@
+[
+  {
+    "id": "quran",
+    "title": "Al-Qur'an al-Karim",
+    "authorOrSource": "Kalamullah",
+    "note": "Terjemah ayat merujuk Al-Qur'an dan Terjemahnya, Kementerian Agama RI.",
+    "url": "https://quran.kemenag.go.id"
+  },
+  {
+    "id": "tirmidzi",
+    "title": "Sunan at-Tirmidzi",
+    "authorOrSource": "Imam Abu 'Isa Muhammad bin 'Isa at-Tirmidzi",
+    "note": "Kitab ad-Da'awat, hadis no. 3507 — riwayat yang merinci 99 nama."
+  },
+  {
+    "id": "bukhari",
+    "title": "Shahih al-Bukhari",
+    "authorOrSource": "Imam Muhammad bin Isma'il al-Bukhari",
+    "note": "Hadis no. 2736 menyebut jumlah 99 nama tanpa merinci."
+  },
+  {
+    "id": "muslim",
+    "title": "Shahih Muslim",
+    "authorOrSource": "Imam Muslim bin al-Hajjaj an-Naisaburi",
+    "note": "Hadis no. 2677 menyebut jumlah 99 nama tanpa merinci."
+  },
+  {
+    "id": "ghazali",
+    "title": "Al-Maqsad al-Asna fi Syarh Ma'ani Asma' Allah al-Husna",
+    "authorOrSource": "Imam Abu Hamid Muhammad al-Ghazali",
+    "note": "Bagian II berisi syarah makna setiap nama sesuai urutan riwayat at-Tirmidzi."
+  },
+  {
+    "id": "saadi",
+    "title": "Taisir al-Karim ar-Rahman fi Tafsir Kalam al-Mannan",
+    "authorOrSource": "Syaikh 'Abdurrahman bin Nashir as-Sa'di"
+  },
+  {
+    "id": "nawawi",
+    "title": "Al-Minhaj Syarh Shahih Muslim bin al-Hajjaj",
+    "authorOrSource": "Imam Yahya bin Syaraf an-Nawawi",
+    "note": "Penjelasan makna ahsaha (menghafal dan memahami) pada hadis 99 nama."
+  },
+  {
+    "id": "utsaimin",
+    "title": "Majmu' Fatawa wa Rasa'il",
+    "authorOrSource": "Syaikh Muhammad bin Shalih al-'Utsaimin",
+    "note": "Jilid 1, hlm. 74 dan 122 — nama Allah tidak terbatas 99 dan makna ihsha'."
+  }
+]

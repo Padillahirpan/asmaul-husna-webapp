@@ -1,0 +1,120 @@
+@import 'tailwindcss';
+
+/* Tema gelap berbasis kelas `.dark` pada <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+
+  --color-cream-50: #fdfbf9;
+  --color-cream-100: #f8f4f0;
+  --color-cream-200: #efe8e0;
+  --color-cream-300: #e2d6c9;
+
+  /*
+   * WARNA UTAMA APLIKASI — cukup ganti satu baris ini.
+   * Seluruh kelas `*-primary-50` … `*-primary-950` diturunkan otomatis darinya
+   * (tombol, aksen, cincin fokus, kalender streak, status "Belajar", dsb.).
+   * Contoh: #e11d48 (rose), #0d9488 (teal), #2563eb (biru), #059669 (zamrud).
+   */
+  --color-primary: #036144;
+
+  --color-primary-50: color-mix(in oklab, var(--color-primary) 7%, white);
+  --color-primary-100: color-mix(in oklab, var(--color-primary) 14%, white);
+  --color-primary-200: color-mix(in oklab, var(--color-primary) 28%, white);
+  --color-primary-300: color-mix(in oklab, var(--color-primary) 48%, white);
+  --color-primary-400: color-mix(in oklab, var(--color-primary) 72%, white);
+  --color-primary-500: color-mix(in oklab, var(--color-primary) 88%, white);
+  --color-primary-600: var(--color-primary);
+  --color-primary-700: color-mix(in oklab, var(--color-primary) 84%, black);
+  --color-primary-800: color-mix(in oklab, var(--color-primary) 68%, black);
+  --color-primary-900: color-mix(in oklab, var(--color-primary) 52%, black);
+  --color-primary-950: color-mix(in oklab, var(--color-primary) 32%, black);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream-100);
+    color: var(--color-stone-800);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html.dark {
+    background-color: var(--color-stone-950);
+    color: var(--color-stone-100);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+.arabic-text {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  unicode-bidi: isolate;
+  line-height: 1.9;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleShake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-page-enter {
+  animation: pageEnter 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-gentle-shake {
+  animation: gentleShake 280ms ease-in-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-page-enter,
+  .animate-gentle-shake {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

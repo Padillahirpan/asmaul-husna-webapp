@@ -1,0 +1,1197 @@
+{
+  "sourceNote": "Daftar 99 nama ini merujuk pada riwayat at-Tirmidzi (no. 3507) yang populer di masyarakat. Para ulama hadis menilai perincian nama di dalamnya memiliki kelemahan dari sisi sanad, sementara riwayat al-Bukhari (no. 2736) dan Muslim (no. 2677) hanya menyebutkan jumlah 99 tanpa merincinya. Menurut mayoritas ulama Ahlus Sunnah, nama-nama Allah tidak terbatas pada 99.",
+  "bismillah": {
+    "arabic": "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
+    "translation": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."
+  },
+  "names": [
+    {
+      "id": 1,
+      "stage": 1,
+      "arabic": "ٱلرَّحْمَٰنُ",
+      "latin": "Ar-Rahman",
+      "meaning": "Yang Maha Pengasih",
+      "explanation": "Allah memiliki kasih sayang yang sangat luas dan menyeluruh kepada seluruh makhluk-Nya di dunia tanpa terkecuali, mencakup rezeki, kehidupan, dan berbagai nikmat duniawi.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Fatihah [1]: 1, 3" },
+        { "referenceId": "ghazali", "location": "Syarh Ar-Rahman wa Ar-Rahim" }
+      ]
+    },
+    {
+      "id": 2,
+      "stage": 1,
+      "arabic": "ٱلرَّحِيمُ",
+      "latin": "Ar-Rahim",
+      "meaning": "Yang Maha Penyayang",
+      "explanation": "Allah memiliki kasih sayang yang khusus dan kekal yang dianugerahkan kepada hamba-hamba-Nya yang beriman berupa hidayah di dunia serta ampunan dan surga di akhirat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Ahzab [33]: 43" },
+        { "referenceId": "ghazali", "location": "Syarh Ar-Rahman wa Ar-Rahim" }
+      ]
+    },
+    {
+      "id": 3,
+      "stage": 1,
+      "arabic": "ٱلْمَلِكُ",
+      "latin": "Al-Malik",
+      "meaning": "Yang Maha Merajai",
+      "explanation": "Allah adalah Penguasa mutlak atas seluruh alam semesta. Kerajaan-Nya tidak membutuhkan siapa pun, sedangkan seluruh makhluk bergantung penuh kepada-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Malik" }
+      ]
+    },
+    {
+      "id": 4,
+      "stage": 1,
+      "arabic": "ٱلْقُدُّوسُ",
+      "latin": "Al-Quddus",
+      "meaning": "Yang Maha Suci",
+      "explanation": "Allah Maha Suci dari segala sifat kekurangan, cacat, cela, serta dari segala sesuatu yang tidak layak bagi keagungan dan kesempurnaan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Jumu'ah [62]: 1" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hasyr: 23" }
+      ]
+    },
+    {
+      "id": 5,
+      "stage": 1,
+      "arabic": "ٱلسَّلَامُ",
+      "latin": "As-Salam",
+      "meaning": "Yang Maha Memberi Kesejahteraan",
+      "explanation": "Allah Maha Sejahtera dari segala aib dan kekurangan, serta menjadi sumber keselamatan dan kedamaian bagi hamba-hamba-Nya di dunia dan akhirat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "ghazali", "location": "Syarh As-Salam" }
+      ]
+    },
+    {
+      "id": 6,
+      "stage": 1,
+      "arabic": "ٱلْمُؤْمِنُ",
+      "latin": "Al-Mu'min",
+      "meaning": "Yang Maha Memberi Keamanan",
+      "explanation": "Allah memberikan rasa aman kepada hamba-hamba-Nya dari kezaliman, menepati janji-Nya, serta membenarkan risalah para rasul dengan bukti yang nyata.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hasyr: 23" }
+      ]
+    },
+    {
+      "id": 7,
+      "stage": 1,
+      "arabic": "ٱلْمُهَيْمِنُ",
+      "latin": "Al-Muhaimin",
+      "meaning": "Yang Maha Mengawasi dan Memelihara",
+      "explanation": "Allah Maha Mengawasi, menyaksikan, menjaga, dan memelihara seluruh amal perbuatan serta urusan makhluk-Nya tanpa ada satu pun yang luput.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muhaimin" }
+      ]
+    },
+    {
+      "id": 8,
+      "stage": 1,
+      "arabic": "ٱلْعَزِيزُ",
+      "latin": "Al-'Aziz",
+      "meaning": "Yang Maha Perkasa",
+      "explanation": "Allah Maha Perkasa yang tidak dapat dikalahkan oleh siapa pun. Segala kemuliaan, kekuatan, dan kekuasaan yang sempurna adalah milik-Nya semata.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 62" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hasyr: 23" }
+      ]
+    },
+    {
+      "id": 9,
+      "stage": 1,
+      "arabic": "ٱلْجَبَّارُ",
+      "latin": "Al-Jabbar",
+      "meaning": "Yang Maha Kuasa Memaksakan Kehendak",
+      "explanation": "Allah Maha Tinggi dan Maha Kuasa melaksanakan kehendak-Nya atas seluruh makhluk, sekaligus Maha Memulihkan hati yang patah dan memperbaiki keadaan hamba yang lemah.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Jabbar" }
+      ]
+    },
+    {
+      "id": 10,
+      "stage": 1,
+      "arabic": "ٱلْمُتَكَبِّرُ",
+      "latin": "Al-Mutakabbir",
+      "meaning": "Yang Memiliki Segala Kebesaran",
+      "explanation": "Allah pemilik satu-satunya hak atas keagungan dan kebesaran sejati, serta Maha Agung dari segala sifat makhluk yang rendah dan terbatas.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 23" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Mutakabbir" }
+      ]
+    },
+    {
+      "id": 11,
+      "stage": 1,
+      "arabic": "ٱلْخَالِقُ",
+      "latin": "Al-Khaliq",
+      "meaning": "Yang Maha Pencipta",
+      "explanation": "Allah menciptakan segala sesuatu dari ketiadaan tanpa contoh sebelumnya, dengan ukuran dan ketetapan yang sempurna.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 24" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Khaliq" }
+      ]
+    },
+    {
+      "id": 12,
+      "stage": 1,
+      "arabic": "ٱلْبَارِئُ",
+      "latin": "Al-Bari'",
+      "meaning": "Yang Maha Mengadakan dari Tiada",
+      "explanation": "Allah mewujudkan dan menghadirkan ciptaan-Nya ke alam nyata dalam keadaan serasi, seimbang, dan bebas dari ketimpangan.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 24" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hasyr: 24" }
+      ]
+    },
+    {
+      "id": 13,
+      "stage": 1,
+      "arabic": "ٱلْمُصَوِّرُ",
+      "latin": "Al-Mushawwir",
+      "meaning": "Yang Maha Membentuk Rupa",
+      "explanation": "Allah membentuk setiap ciptaan-Nya dengan rupa, ciri, dan susunan yang unik dan indah sesuai hikmah dan kebijaksanaan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hasyr [59]: 24" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Mushawwir" }
+      ]
+    },
+    {
+      "id": 14,
+      "stage": 1,
+      "arabic": "ٱلْغَفَّارُ",
+      "latin": "Al-Ghaffar",
+      "meaning": "Yang Maha Pengampun",
+      "explanation": "Allah senantiasa dan berulang kali mengampuni dosa-dosa hamba-Nya yang bertaubat serta menutupi keburukan mereka di dunia dan akhirat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Nuh [71]: 10" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Ghaffar" }
+      ]
+    },
+    {
+      "id": 15,
+      "stage": 1,
+      "arabic": "ٱلْقَهَّارُ",
+      "latin": "Al-Qahhar",
+      "meaning": "Yang Maha Menundukkan",
+      "explanation": "Allah menundukkan seluruh makhluk di bawah kekuasaan dan kehendak-Nya; tidak ada satu kekuatan pun yang mampu menentang ketetapan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Ra'd [13]: 16" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Ar-Ra'd: 16" }
+      ]
+    },
+    {
+      "id": 16,
+      "stage": 2,
+      "arabic": "ٱلْوَهَّابُ",
+      "latin": "Al-Wahhab",
+      "meaning": "Yang Maha Pemberi Karunia",
+      "explanation": "Allah memberi karunia dan nikmat secara terus-menerus tanpa mengharap imbalan dan tanpa batas kepada siapa saja yang dikehendaki-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 8" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Wahhab" }
+      ]
+    },
+    {
+      "id": 17,
+      "stage": 2,
+      "arabic": "ٱلرَّزَّاقُ",
+      "latin": "Ar-Razzaq",
+      "meaning": "Yang Maha Pemberi Rezeki",
+      "explanation": "Allah menjamin dan membagikan rezeki lahir maupun batin kepada seluruh makhluk hidup di darat, laut, maupun udara.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Adz-Dzariyat [51]: 58" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Adz-Dzariyat: 58" }
+      ]
+    },
+    {
+      "id": 18,
+      "stage": 2,
+      "arabic": "ٱلْفَتَّاحُ",
+      "latin": "Al-Fattah",
+      "meaning": "Yang Maha Pembuka Rahmat",
+      "explanation": "Allah membuka pintu-pintu rahmat, rezeki, ilmu, dan jalan keluar dari kesulitan, serta memberi keputusan yang adil di antara hamba-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Saba' [34]: 26" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Fattah" }
+      ]
+    },
+    {
+      "id": 19,
+      "stage": 2,
+      "arabic": "ٱلْعَلِيمُ",
+      "latin": "Al-'Alim",
+      "meaning": "Yang Maha Mengetahui",
+      "explanation": "Ilmu Allah meliputi segala sesuatu yang tampak maupun tersembunyi, yang telah berlalu, sedang terjadi, maupun yang akan datang.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 29" },
+        { "referenceId": "utsaimin", "location": "Majmu' Fatawa 1/122" }
+      ]
+    },
+    {
+      "id": 20,
+      "stage": 2,
+      "arabic": "ٱلْقَابِضُ",
+      "latin": "Al-Qabidh",
+      "meaning": "Yang Maha Menyempitkan",
+      "explanation": "Allah menahan dan menyempitkan rezeki atau kelapangan bagi sebagian hamba-Nya berdasarkan ilmu dan hikmah-Nya yang sempurna.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 245" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qabidh wa Al-Basith" }
+      ]
+    },
+    {
+      "id": 21,
+      "stage": 2,
+      "arabic": "ٱلْبَاسِطُ",
+      "latin": "Al-Basith",
+      "meaning": "Yang Maha Melapangkan",
+      "explanation": "Allah melapangkan rezeki, rahmat, dan ketenangan hati bagi hamba-hamba yang dikehendaki-Nya dengan penuh kemurahan.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 245" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qabidh wa Al-Basith" }
+      ]
+    },
+    {
+      "id": 22,
+      "stage": 2,
+      "arabic": "ٱلْخَافِضُ",
+      "latin": "Al-Khafidh",
+      "meaning": "Yang Maha Merendahkan",
+      "explanation": "Allah merendahkan derajat orang-orang yang sombong, zalim, dan menentang kebenaran sesuai keadilan-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Khafidh wa Ar-Rafi'" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 23,
+      "stage": 2,
+      "arabic": "ٱلرَّافِعُ",
+      "latin": "Ar-Rafi'",
+      "meaning": "Yang Maha Meninggikan",
+      "explanation": "Allah meninggikan derajat hamba-hamba-Nya yang beriman, berilmu, dan bertakwa di dunia maupun di akhirat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Mujadilah [58]: 11" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Khafidh wa Ar-Rafi'" }
+      ]
+    },
+    {
+      "id": 24,
+      "stage": 2,
+      "arabic": "ٱلْمُعِزُّ",
+      "latin": "Al-Mu'izz",
+      "meaning": "Yang Maha Memuliakan",
+      "explanation": "Allah menganugerahkan kemuliaan dan kehormatan sejati kepada siapa saja yang dikehendaki-Nya karena ketaatan kepada-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 26" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Ali 'Imran: 26" }
+      ]
+    },
+    {
+      "id": 25,
+      "stage": 2,
+      "arabic": "ٱلْمُذِلُّ",
+      "latin": "Al-Mudzill",
+      "meaning": "Yang Maha Menghinakan",
+      "explanation": "Allah menimpakan kehinaan kepada siapa saja yang berpaling dari ketaatan kepada-Nya dan menyombongkan diri.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 26" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Ali 'Imran: 26" }
+      ]
+    },
+    {
+      "id": 26,
+      "stage": 2,
+      "arabic": "ٱلسَّمِيعُ",
+      "latin": "As-Sami'",
+      "meaning": "Yang Maha Mendengar",
+      "explanation": "Allah mendengar seluruh suara, bisikan hati, doa, dan permohonan makhluk-Nya dalam berbagai bahasa tanpa terhalang jarak.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Asy-Syura [42]: 11" },
+        { "referenceId": "ghazali", "location": "Syarh As-Sami'" }
+      ]
+    },
+    {
+      "id": 27,
+      "stage": 2,
+      "arabic": "ٱلْبَصِيرُ",
+      "latin": "Al-Bashir",
+      "meaning": "Yang Maha Melihat",
+      "explanation": "Allah melihat segala sesuatu secara rinci, baik yang tampak jelas maupun yang tersembunyi di dalam kegelapan.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Asy-Syura [42]: 11" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Bashir" }
+      ]
+    },
+    {
+      "id": 28,
+      "stage": 2,
+      "arabic": "ٱلْحَكَمُ",
+      "latin": "Al-Hakam",
+      "meaning": "Yang Maha Menetapkan Hukum",
+      "explanation": "Allah adalah Hakim yang paling adil; keputusan-Nya pasti berlaku dan tidak ada satu pun yang dapat membatalkan ketetapan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-An'am [6]: 114" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Hakam" }
+      ]
+    },
+    {
+      "id": 29,
+      "stage": 2,
+      "arabic": "ٱلْعَدْلُ",
+      "latin": "Al-'Adl",
+      "meaning": "Yang Maha Adil",
+      "explanation": "Allah Maha Adil dalam seluruh penciptaan, syariat, dan balasan amal; Dia tidak pernah menzalimi hamba-Nya sedikit pun.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-An'am [6]: 115" },
+        { "referenceId": "ghazali", "location": "Syarh Al-'Adl" }
+      ]
+    },
+    {
+      "id": 30,
+      "stage": 2,
+      "arabic": "ٱللَّطِيفُ",
+      "latin": "Al-Lathif",
+      "meaning": "Yang Maha Lembut",
+      "explanation": "Allah Maha Halus ilmu-Nya hingga menjangkau perkara paling tersembunyi, serta Maha Lembut dalam mengantarkan kebaikan kepada hamba-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Asy-Syura [42]: 19" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Asy-Syura: 19" }
+      ]
+    },
+    {
+      "id": 31,
+      "stage": 3,
+      "arabic": "ٱلْخَبِيرُ",
+      "latin": "Al-Khabir",
+      "meaning": "Yang Maha Mengenal Secara Mendalam",
+      "explanation": "Allah mengetahui hakikat batin dan rahasia terdalam dari segala sesuatu, tidak hanya sisi lahiriahnya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Mulk [67]: 14" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Khabir" }
+      ]
+    },
+    {
+      "id": 32,
+      "stage": 3,
+      "arabic": "ٱلْحَلِيمُ",
+      "latin": "Al-Halim",
+      "meaning": "Yang Maha Penyantun",
+      "explanation": "Allah tidak tergesa-gesa menimpakan siksa kepada hamba yang bermaksiat, melainkan memberi tangguh dan kesempatan untuk bertaubat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 225" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Halim" }
+      ]
+    },
+    {
+      "id": 33,
+      "stage": 3,
+      "arabic": "ٱلْعَظِيمُ",
+      "latin": "Al-'Azhim",
+      "meaning": "Yang Maha Agung",
+      "explanation": "Allah memiliki keagungan yang mutlak pada zat, nama, sifat, dan perbuatan-Nya, melampaui segala ukuran akal manusia.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 255" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Baqarah: 255" }
+      ]
+    },
+    {
+      "id": 34,
+      "stage": 3,
+      "arabic": "ٱلْغَفُورُ",
+      "latin": "Al-Ghafur",
+      "meaning": "Yang Maha Luas Ampunan-Nya",
+      "explanation": "Ampunan Allah amat luas dan sempurna, menghapus dosa sebesar apa pun bagi hamba yang kembali dan memohon ampun kepada-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Az-Zumar [39]: 53" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Ghafur" }
+      ]
+    },
+    {
+      "id": 35,
+      "stage": 3,
+      "arabic": "ٱلشَّكُورُ",
+      "latin": "Asy-Syakur",
+      "meaning": "Yang Maha Membalas Kebaikan",
+      "explanation": "Allah menghargai amal saleh hamba-Nya sekecil apa pun dan membalasnya dengan ganjaran yang berlipat ganda.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Fathir [35]: 30" },
+        { "referenceId": "ghazali", "location": "Syarh Asy-Syakur" }
+      ]
+    },
+    {
+      "id": 36,
+      "stage": 3,
+      "arabic": "ٱلْعَلِيُّ",
+      "latin": "Al-'Aliyy",
+      "meaning": "Yang Maha Tinggi",
+      "explanation": "Allah Maha Tinggi kedudukan, kekuasaan, dan zat-Nya di atas seluruh makhluk-Nya; tidak ada yang lebih tinggi dari-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 255" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Baqarah: 255" }
+      ]
+    },
+    {
+      "id": 37,
+      "stage": 3,
+      "arabic": "ٱلْكَبِيرُ",
+      "latin": "Al-Kabir",
+      "meaning": "Yang Maha Besar",
+      "explanation": "Allah Maha Besar dalam segala sifat kesempurnaan-Nya; segala sesuatu selain-Nya adalah kecil di hadapan kebesaran-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Ra'd [13]: 9" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Kabir" }
+      ]
+    },
+    {
+      "id": 38,
+      "stage": 3,
+      "arabic": "ٱلْحَفِيظُ",
+      "latin": "Al-Hafizh",
+      "meaning": "Yang Maha Menjaga",
+      "explanation": "Allah menjaga keberlangsungan alam semesta, melindungi hamba-hamba-Nya yang beriman, serta memelihara catatan seluruh amal makhluk.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Hud [11]: 57" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Hafizh" }
+      ]
+    },
+    {
+      "id": 39,
+      "stage": 3,
+      "arabic": "ٱلْمُقِيتُ",
+      "latin": "Al-Muqit",
+      "meaning": "Yang Maha Pemberi Kecukupan",
+      "explanation": "Allah menciptakan dan menyampaikan kebutuhan hidup serta kekuatan bagi setiap makhluk secara cukup dan tepat ukuran.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Nisa' [4]: 85" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muqit" }
+      ]
+    },
+    {
+      "id": 40,
+      "stage": 3,
+      "arabic": "ٱلْحَسِيبُ",
+      "latin": "Al-Hasib",
+      "meaning": "Yang Maha Membuat Perhitungan",
+      "explanation": "Allah mencukupi segala kebutuhan hamba yang bertawakal kepada-Nya dan menghitung setiap amal perbuatan dengan teliti.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Nisa' [4]: 6" },
+        { "referenceId": "saadi", "location": "Tafsir QS. An-Nisa': 86" }
+      ]
+    },
+    {
+      "id": 41,
+      "stage": 3,
+      "arabic": "ٱلْجَلِيلُ",
+      "latin": "Al-Jalil",
+      "meaning": "Yang Maha Luhur",
+      "explanation": "Allah memiliki keluhuran dan keagungan sifat yang sempurna dalam kekuasaan, ilmu, kekayaan, dan kesucian-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Jalil" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 42,
+      "stage": 3,
+      "arabic": "ٱلْكَرِيمُ",
+      "latin": "Al-Karim",
+      "meaning": "Yang Maha Pemurah",
+      "explanation": "Allah amat melimpah kebaikan dan kemurahan-Nya, memberi sebelum diminta, menepati janji, dan memaafkan saat mampu membalas.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Infithar [82]: 6" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Karim" }
+      ]
+    },
+    {
+      "id": 43,
+      "stage": 3,
+      "arabic": "ٱلرَّقِيبُ",
+      "latin": "Ar-Raqib",
+      "meaning": "Yang Maha Mengawasi",
+      "explanation": "Allah senantiasa mengawasi setiap gerak-gerik, ucapan, dan bisikan hati makhluk-Nya tanpa pernah lengah sedikit pun.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Nisa' [4]: 1" },
+        { "referenceId": "saadi", "location": "Tafsir QS. An-Nisa': 1" }
+      ]
+    },
+    {
+      "id": 44,
+      "stage": 3,
+      "arabic": "ٱلْمُجِيبُ",
+      "latin": "Al-Mujib",
+      "meaning": "Yang Maha Mengabulkan",
+      "explanation": "Allah mendengar dan mengabulkan doa serta permohonan hamba-hamba-Nya yang berseru kepada-Nya sesuai hikmah-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Hud [11]: 61" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Mujib" }
+      ]
+    },
+    {
+      "id": 45,
+      "stage": 3,
+      "arabic": "ٱلْوَاسِعُ",
+      "latin": "Al-Wasi'",
+      "meaning": "Yang Maha Luas",
+      "explanation": "Rahmat, ilmu, kekayaan, ampunan, dan kekuasaan Allah amat luas sehingga meliputi segala sesuatu di alam semesta.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 115" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Baqarah: 268" }
+      ]
+    },
+    {
+      "id": 46,
+      "stage": 4,
+      "arabic": "ٱلْحَكِيمُ",
+      "latin": "Al-Hakim",
+      "meaning": "Yang Maha Bijaksana",
+      "explanation": "Allah meletakkan segala sesuatu pada tempatnya dengan penuh hikmah; setiap penciptaan dan syariat-Nya mengandung tujuan yang mulia.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Luqman [31]: 27" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Hakim" }
+      ]
+    },
+    {
+      "id": 47,
+      "stage": 4,
+      "arabic": "ٱلْوَدُودُ",
+      "latin": "Al-Wadud",
+      "meaning": "Yang Maha Mengasihi",
+      "explanation": "Allah mencintai hamba-hamba-Nya yang beriman dan beramal saleh, sekaligus dicintai sepenuh hati oleh mereka.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Buruj [85]: 14" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Hud: 90" }
+      ]
+    },
+    {
+      "id": 48,
+      "stage": 4,
+      "arabic": "ٱلْمَجِيدُ",
+      "latin": "Al-Majiid",
+      "meaning": "Yang Maha Mulia",
+      "explanation": "Allah memiliki kemuliaan zat, keluasan sifat kebaikan, dan keagungan perbuatan yang sempurna dari segala sisi.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Hud [11]: 73" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Majiid" }
+      ]
+    },
+    {
+      "id": 49,
+      "stage": 4,
+      "arabic": "ٱلْبَاعِثُ",
+      "latin": "Al-Ba'its",
+      "meaning": "Yang Maha Membangkitkan",
+      "explanation": "Allah mengutus para rasul kepada umat manusia dan membangkitkan kembali seluruh makhluk dari kubur pada hari kiamat.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hajj [22]: 7" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Ba'its" }
+      ]
+    },
+    {
+      "id": 50,
+      "stage": 4,
+      "arabic": "ٱلشَّهِيدُ",
+      "latin": "Asy-Syahid",
+      "meaning": "Yang Maha Menyaksikan",
+      "explanation": "Allah menyaksikan segala peristiwa, ucapan, dan perbuatan di seluruh alam; tidak ada sesuatu pun yang tersembunyi dari persaksian-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Buruj [85]: 9" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Buruj: 9" }
+      ]
+    },
+    {
+      "id": 51,
+      "stage": 4,
+      "arabic": "ٱلْحَقُّ",
+      "latin": "Al-Haqq",
+      "meaning": "Yang Maha Benar",
+      "explanation": "Allah adalah Zat yang benar-benar ada secara hakiki dan kekal; firman, janji, dan pertemuan dengan-Nya adalah kebenaran yang pasti.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hajj [22]: 62" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Haqq" }
+      ]
+    },
+    {
+      "id": 52,
+      "stage": 4,
+      "arabic": "ٱلْوَكِيلُ",
+      "latin": "Al-Wakil",
+      "meaning": "Yang Maha Mewakili dan Mengurus",
+      "explanation": "Allah mengurus dan menanggung seluruh urusan makhluk-Nya serta menjadi tempat bersandar terbaik bagi hamba yang bertawakal.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 173" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Az-Zumar: 62" }
+      ]
+    },
+    {
+      "id": 53,
+      "stage": 4,
+      "arabic": "ٱلْقَوِيُّ",
+      "latin": "Al-Qawiyy",
+      "meaning": "Yang Maha Kuat",
+      "explanation": "Allah memiliki kekuatan yang sempurna tanpa pernah melemah, lelah, atau membutuhkan bantuan dari makhluk mana pun.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hajj [22]: 40" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qawiyy wa Al-Matin" }
+      ]
+    },
+    {
+      "id": 54,
+      "stage": 4,
+      "arabic": "ٱلْمَتِينُ",
+      "latin": "Al-Matin",
+      "meaning": "Yang Maha Kokoh",
+      "explanation": "Kekuatan dan kekuasaan Allah amat kokoh dan teguh, tidak pernah goyah maupun berkurang dalam menjalankan segala ketetapan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Adz-Dzariyat [51]: 58" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qawiyy wa Al-Matin" }
+      ]
+    },
+    {
+      "id": 55,
+      "stage": 4,
+      "arabic": "ٱلْوَلِيُّ",
+      "latin": "Al-Waliyy",
+      "meaning": "Yang Maha Melindungi",
+      "explanation": "Allah adalah pelindung, penolong, dan pengurus urusan orang-orang beriman yang mengeluarkan mereka dari kegelapan menuju cahaya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 257" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Asy-Syura: 28" }
+      ]
+    },
+    {
+      "id": 56,
+      "stage": 4,
+      "arabic": "ٱلْحَمِيدُ",
+      "latin": "Al-Hamid",
+      "meaning": "Yang Maha Terpuji",
+      "explanation": "Allah berhak atas segala pujian karena kesempurnaan zat, sifat, dan nikmat-Nya yang tiada putus bagi seluruh makhluk.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ibrahim [14]: 8" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Hamid" }
+      ]
+    },
+    {
+      "id": 57,
+      "stage": 4,
+      "arabic": "ٱلْمُحْصِي",
+      "latin": "Al-Muhshi",
+      "meaning": "Yang Maha Menghitung",
+      "explanation": "Allah mengetahui dan menghitung jumlah segala sesuatu secara rinci, tidak ada satu pun yang terlewat dari ilmu-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Jinn [72]: 28" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muhshi" }
+      ]
+    },
+    {
+      "id": 58,
+      "stage": 4,
+      "arabic": "ٱلْمُبْدِئُ",
+      "latin": "Al-Mubdi'",
+      "meaning": "Yang Maha Memulai Penciptaan",
+      "explanation": "Allah yang pertama kali memulai penciptaan seluruh makhluk tanpa didahului contoh atau bahan sebelumnya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Buruj [85]: 13" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Mubdi' wa Al-Mu'id" }
+      ]
+    },
+    {
+      "id": 59,
+      "stage": 4,
+      "arabic": "ٱلْمُعِيدُ",
+      "latin": "Al-Mu'id",
+      "meaning": "Yang Maha Mengembalikan",
+      "explanation": "Allah mengembalikan kehidupan makhluk setelah kematian pada hari kebangkitan untuk menerima balasan amal mereka.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Buruj [85]: 13" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Mubdi' wa Al-Mu'id" }
+      ]
+    },
+    {
+      "id": 60,
+      "stage": 4,
+      "arabic": "ٱلْمُحْيِي",
+      "latin": "Al-Muhyi",
+      "meaning": "Yang Maha Menghidupkan",
+      "explanation": "Allah menganugerahkan kehidupan kepada makhluk yang mati, menghidupkan bumi yang gersang dengan hujan, serta menghidupkan hati dengan iman.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Rum [30]: 50" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muhyi wa Al-Mumit" }
+      ]
+    },
+    {
+      "id": 61,
+      "stage": 5,
+      "arabic": "ٱلْمُمِيتُ",
+      "latin": "Al-Mumit",
+      "meaning": "Yang Maha Mematikan",
+      "explanation": "Allah yang menetapkan ajal dan mencabut nyawa setiap makhluk yang bernyawa pada waktu yang telah ditentukan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hadid [57]: 2" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muhyi wa Al-Mumit" }
+      ]
+    },
+    {
+      "id": 62,
+      "stage": 5,
+      "arabic": "ٱلْحَيُّ",
+      "latin": "Al-Hayy",
+      "meaning": "Yang Maha Hidup",
+      "explanation": "Allah memiliki kehidupan yang sempurna dan kekal, tidak diawali ketiadaan dan tidak pernah diakhiri kematian atau kelemahan.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 255" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Baqarah: 255" }
+      ]
+    },
+    {
+      "id": 63,
+      "stage": 5,
+      "arabic": "ٱلْقَيُّومُ",
+      "latin": "Al-Qayyum",
+      "meaning": "Yang Maha Mandiri",
+      "explanation": "Allah berdiri sendiri tanpa membutuhkan siapa pun, dan Dialah yang terus-menerus menopang serta mengurus seluruh alam semesta.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 255" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qayyum" }
+      ]
+    },
+    {
+      "id": 64,
+      "stage": 5,
+      "arabic": "ٱلْوَاجِدُ",
+      "latin": "Al-Wajid",
+      "meaning": "Yang Maha Menemukan dan Maha Kaya",
+      "explanation": "Allah tidak pernah kekurangan sesuatu pun; segala sifat kesempurnaan dan apa saja yang dikehendaki-Nya ada dalam kekuasaan-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Wajid" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 65,
+      "stage": 5,
+      "arabic": "ٱلْمَاجِدُ",
+      "latin": "Al-Maajid",
+      "meaning": "Yang Maha Mulia lagi Dermawan",
+      "explanation": "Allah menghimpun keluhuran zat, kesempurnaan sifat, serta keluasan kemurahan dan pemberian kepada seluruh makhluk-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Maajid" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 66,
+      "stage": 5,
+      "arabic": "ٱلْوَاحِدُ",
+      "latin": "Al-Wahid",
+      "meaning": "Yang Maha Tunggal",
+      "explanation": "Allah tunggal dalam zat, sifat, dan hak untuk diibadahi; tidak ada sekutu maupun tandingan bagi-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 163" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Wahid" }
+      ]
+    },
+    {
+      "id": 67,
+      "stage": 5,
+      "arabic": "ٱلْأَحَدُ",
+      "latin": "Al-Ahad",
+      "meaning": "Yang Maha Esa",
+      "explanation": "Allah Esa secara mutlak, tidak terbagi-bagi, tidak beranak dan tidak pula diperanakkan, serta tidak ada satu pun yang setara dengan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Ikhlas [112]: 1" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Ikhlas: 1" }
+      ]
+    },
+    {
+      "id": 68,
+      "stage": 5,
+      "arabic": "ٱلصَّمَدُ",
+      "latin": "Ash-Shamad",
+      "meaning": "Yang Maha Dibutuhkan",
+      "explanation": "Allah adalah tempat bergantung dan tujuan seluruh makhluk dalam memenuhi segala hajatnya, sementara Dia tidak bergantung pada siapa pun.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Ikhlas [112]: 2" },
+        { "referenceId": "ghazali", "location": "Syarh Ash-Shamad" }
+      ]
+    },
+    {
+      "id": 69,
+      "stage": 5,
+      "arabic": "ٱلْقَادِرُ",
+      "latin": "Al-Qadir",
+      "meaning": "Yang Maha Menentukan",
+      "explanation": "Allah berkuasa penuh atas segala sesuatu; apabila Dia menghendaki sesuatu terjadi, tidak ada satu pun yang mampu menghalanginya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-An'am [6]: 65" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Qadir wa Al-Muqtadir" }
+      ]
+    },
+    {
+      "id": 70,
+      "stage": 5,
+      "arabic": "ٱلْمُقْتَدِرُ",
+      "latin": "Al-Muqtadir",
+      "meaning": "Yang Maha Berkuasa",
+      "explanation": "Allah memiliki kekuasaan yang amat besar dan sempurna dalam mewujudkan kehendak serta mengatur seluruh alam semesta.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Qamar [54]: 42" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Qamar: 42" }
+      ]
+    },
+    {
+      "id": 71,
+      "stage": 5,
+      "arabic": "ٱلْمُقَدِّمُ",
+      "latin": "Al-Muqaddim",
+      "meaning": "Yang Maha Mendahulukan",
+      "explanation": "Allah mendahulukan apa dan siapa saja yang dikehendaki-Nya dalam penciptaan, kedudukan, maupun takdir berdasarkan hikmah-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Muqaddim wa Al-Mu'akhkhir" },
+        { "referenceId": "bukhari", "location": "Hadis doa tahajud no. 1120" }
+      ]
+    },
+    {
+      "id": 72,
+      "stage": 5,
+      "arabic": "ٱلْمُؤَخِّرُ",
+      "latin": "Al-Mu'akhkhir",
+      "meaning": "Yang Maha Mengakhirkan",
+      "explanation": "Allah mengakhirkan sesuatu yang dikehendaki-Nya ke waktu dan kedudukan yang tepat sesuai ilmu dan kebijaksanaan-Nya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Muqaddim wa Al-Mu'akhkhir" },
+        { "referenceId": "bukhari", "location": "Hadis doa tahajud no. 1120" }
+      ]
+    },
+    {
+      "id": 73,
+      "stage": 5,
+      "arabic": "ٱلْأَوَّلُ",
+      "latin": "Al-Awwal",
+      "meaning": "Yang Maha Awal",
+      "explanation": "Allah telah ada sebelum segala sesuatu ada; tidak ada sesuatu pun yang mendahului keberadaan-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hadid [57]: 3" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hadid: 3" }
+      ]
+    },
+    {
+      "id": 74,
+      "stage": 5,
+      "arabic": "ٱلْآخِرُ",
+      "latin": "Al-Akhir",
+      "meaning": "Yang Maha Akhir",
+      "explanation": "Allah tetap ada setelah seluruh makhluk binasa; tidak ada sesuatu pun sesudah-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hadid [57]: 3" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hadid: 3" }
+      ]
+    },
+    {
+      "id": 75,
+      "stage": 5,
+      "arabic": "ٱلظَّاهِرُ",
+      "latin": "Azh-Zhahir",
+      "meaning": "Yang Maha Nyata",
+      "explanation": "Allah Maha Tinggi di atas segala sesuatu, dan tanda-tanda keberadaan serta kekuasaan-Nya tampak amat nyata di seluruh alam.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hadid [57]: 3" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hadid: 3" }
+      ]
+    },
+    {
+      "id": 76,
+      "stage": 6,
+      "arabic": "ٱلْبَاطِنُ",
+      "latin": "Al-Bathin",
+      "meaning": "Yang Maha Tersembunyi",
+      "explanation": "Zat Allah tidak dapat dijangkau oleh penglihatan mata di dunia, sementara ilmu dan kedekatan-Nya meliputi segala yang tersembunyi.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hadid [57]: 3" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hadid: 3" }
+      ]
+    },
+    {
+      "id": 77,
+      "stage": 6,
+      "arabic": "ٱلْوَالِي",
+      "latin": "Al-Wali",
+      "meaning": "Yang Maha Memerintah",
+      "explanation": "Allah adalah pemilik, pengatur, dan pelaksana tunggal atas segala urusan di langit dan di bumi.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Ra'd [13]: 11" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Wali" }
+      ]
+    },
+    {
+      "id": 78,
+      "stage": 6,
+      "arabic": "ٱلْمُتَعَالِي",
+      "latin": "Al-Muta'ali",
+      "meaning": "Yang Maha Tinggi lagi Luhur",
+      "explanation": "Allah Maha Tinggi dan Maha Suci dari segala sifat kekurangan makhluk serta dari segala perumpamaan yang tidak layak bagi-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Ra'd [13]: 9" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muta'ali" }
+      ]
+    },
+    {
+      "id": 79,
+      "stage": 6,
+      "arabic": "ٱلْبَرُّ",
+      "latin": "Al-Barr",
+      "meaning": "Yang Maha Penderma",
+      "explanation": "Allah amat luas kebaikan, kelembutan, dan curahan nikmat-Nya kepada seluruh makhluk-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ath-Thur [52]: 28" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Ath-Thur: 28" }
+      ]
+    },
+    {
+      "id": 80,
+      "stage": 6,
+      "arabic": "ٱلتَّوَّابُ",
+      "latin": "At-Tawwab",
+      "meaning": "Yang Maha Penerima Taubat",
+      "explanation": "Allah memberi taufik kepada hamba untuk bertaubat dan senantiasa menerima taubat hamba-Nya yang kembali dengan tulus.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 37" },
+        { "referenceId": "ghazali", "location": "Syarh At-Tawwab" }
+      ]
+    },
+    {
+      "id": 81,
+      "stage": 6,
+      "arabic": "ٱلْمُنْتَقِمُ",
+      "latin": "Al-Muntaqim",
+      "meaning": "Yang Maha Pemberi Balasan",
+      "explanation": "Allah menimpakan balasan yang setimpal dan adil kepada orang-orang yang terus-menerus berbuat zalim setelah peringatan disampaikan.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. As-Sajdah [32]: 22" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Muntaqim" }
+      ]
+    },
+    {
+      "id": 82,
+      "stage": 6,
+      "arabic": "ٱلْعَفُوُّ",
+      "latin": "Al-'Afuww",
+      "meaning": "Yang Maha Pemaaf",
+      "explanation": "Allah memaafkan dan menghapuskan bekas kesalahan serta dosa hamba-hamba-Nya sehingga tidak lagi menghukum mereka karenanya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Nisa' [4]: 99" },
+        { "referenceId": "ghazali", "location": "Syarh Al-'Afuww" }
+      ]
+    },
+    {
+      "id": 83,
+      "stage": 6,
+      "arabic": "ٱلرَّءُوفُ",
+      "latin": "Ar-Ra'uf",
+      "meaning": "Yang Maha Belas Kasih",
+      "explanation": "Allah memiliki belas kasih yang amat lembut dan mendalam kepada hamba-hamba-Nya, termasuk dengan memudahkan syariat dan meringankan beban mereka.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 143" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Baqarah: 143" }
+      ]
+    },
+    {
+      "id": 84,
+      "stage": 6,
+      "arabic": "مَالِكُ ٱلْمُلْكِ",
+      "latin": "Malikul-Mulk",
+      "meaning": "Penguasa Kerajaan Semesta",
+      "explanation": "Allah pemilik mutlak seluruh kerajaan di langit dan di bumi; Dia memberikan kekuasaan kepada siapa yang Dia kehendaki dan mencabutnya sesuai hikmah-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 26" },
+        { "referenceId": "ghazali", "location": "Syarh Malikul-Mulk" }
+      ]
+    },
+    {
+      "id": 85,
+      "stage": 6,
+      "arabic": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ",
+      "latin": "Dzul-Jalali wal-Ikram",
+      "meaning": "Pemilik Kebesaran dan Kemuliaan",
+      "explanation": "Allah pemilik segala keagungan yang layak diagungkan dan pemilik kemuliaan yang memuliakan hamba-hamba-Nya yang bertakwa.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Rahman [55]: 27, 78" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Ar-Rahman: 27" }
+      ]
+    },
+    {
+      "id": 86,
+      "stage": 6,
+      "arabic": "ٱلْمُقْسِطُ",
+      "latin": "Al-Muqsith",
+      "meaning": "Yang Maha Pemberi Keadilan",
+      "explanation": "Allah menegakkan keadilan yang sempurna di antara seluruh makhluk, membela yang terzalimi, dan memberi balasan secara adil.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Muqsith" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 87,
+      "stage": 6,
+      "arabic": "ٱلْجَامِعُ",
+      "latin": "Al-Jami'",
+      "meaning": "Yang Maha Mengumpulkan",
+      "explanation": "Allah menghimpun seluruh sifat kesempurnaan dan akan mengumpulkan seluruh umat manusia pada hari kiamat untuk dihisab.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ali 'Imran [3]: 9" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Jami'" }
+      ]
+    },
+    {
+      "id": 88,
+      "stage": 6,
+      "arabic": "ٱلْغَنِيُّ",
+      "latin": "Al-Ghaniyy",
+      "meaning": "Yang Maha Kaya",
+      "explanation": "Allah Maha Kaya secara mutlak dan tidak membutuhkan ibadah maupun bantuan makhluk, sedangkan seluruh makhluk bergantung kepada-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Fathir [35]: 15" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Fathir: 15" }
+      ]
+    },
+    {
+      "id": 89,
+      "stage": 6,
+      "arabic": "ٱلْمُغْنِي",
+      "latin": "Al-Mughni",
+      "meaning": "Yang Maha Pemberi Kekayaan",
+      "explanation": "Allah mencukupi kebutuhan dan melapangkan rezeki serta rasa cukup di dalam hati hamba-hamba yang dikehendaki-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Najm [53]: 48" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Ghaniyy wa Al-Mughni" }
+      ]
+    },
+    {
+      "id": 90,
+      "stage": 6,
+      "arabic": "ٱلْمَانِعُ",
+      "latin": "Al-Mani'",
+      "meaning": "Yang Maha Mencegah",
+      "explanation": "Allah menahan sebagian pemberian atau mencegah bahaya menimpa hamba-Nya berdasarkan ilmu dan hikmah-Nya yang melindungi.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Al-Mani'" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 91,
+      "stage": 7,
+      "arabic": "ٱلضَّارُّ",
+      "latin": "Adh-Dharr",
+      "meaning": "Yang Maha Penimpa Kemudaratan",
+      "explanation": "Tidak ada bahaya atau ujian yang menimpa seorang makhluk pun kecuali dengan izin dan ketetapan Allah yang penuh hikmah.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Yunus [10]: 107" },
+        { "referenceId": "ghazali", "location": "Syarh Adh-Dharr wa An-Nafi'" }
+      ]
+    },
+    {
+      "id": 92,
+      "stage": 7,
+      "arabic": "ٱلنَّافِعُ",
+      "latin": "An-Nafi'",
+      "meaning": "Yang Maha Memberi Manfaat",
+      "explanation": "Segala kebaikan dan manfaat di dunia maupun di akhirat semata-mata bersumber dari karunia dan izin Allah.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Yunus [10]: 107" },
+        { "referenceId": "ghazali", "location": "Syarh Adh-Dharr wa An-Nafi'" }
+      ]
+    },
+    {
+      "id": 93,
+      "stage": 7,
+      "arabic": "ٱلنُّورُ",
+      "latin": "An-Nur",
+      "meaning": "Yang Maha Bercahaya",
+      "explanation": "Allah pemberi cahaya bagi langit dan bumi, serta menerangi hati hamba-hamba-Nya dengan cahaya iman dan petunjuk wahyu.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. An-Nur [24]: 35" },
+        { "referenceId": "saadi", "location": "Tafsir QS. An-Nur: 35" }
+      ]
+    },
+    {
+      "id": 94,
+      "stage": 7,
+      "arabic": "ٱلْهَادِي",
+      "latin": "Al-Hadi",
+      "meaning": "Yang Maha Pemberi Petunjuk",
+      "explanation": "Allah membimbing seluruh makhluk menuju kemaslahatannya dan memberi petunjuk hidayah ke jalan yang lurus bagi hamba yang dikehendaki-Nya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Furqan [25]: 31" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Hadi" }
+      ]
+    },
+    {
+      "id": 95,
+      "stage": 7,
+      "arabic": "ٱلْبَدِيعُ",
+      "latin": "Al-Badi'",
+      "meaning": "Yang Maha Pencipta Keindahan",
+      "explanation": "Allah menciptakan langit, bumi, dan segala isinya dengan keindahan dan keunikan luar biasa tanpa meniru contoh sebelumnya.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Baqarah [2]: 117" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Badi'" }
+      ]
+    },
+    {
+      "id": 96,
+      "stage": 7,
+      "arabic": "ٱلْبَاقِي",
+      "latin": "Al-Baqi",
+      "meaning": "Yang Maha Kekal",
+      "explanation": "Keberadaan Allah kekal abadi dan tidak akan pernah punah, berbeda dengan seluruh makhluk yang bersifat fana.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Ar-Rahman [55]: 27" },
+        { "referenceId": "ghazali", "location": "Syarh Al-Baqi" }
+      ]
+    },
+    {
+      "id": 97,
+      "stage": 7,
+      "arabic": "ٱلْوَارِثُ",
+      "latin": "Al-Warits",
+      "meaning": "Yang Maha Pewaris",
+      "explanation": "Allah tetap kekal setelah seluruh pemilik di bumi tiada, dan kepada-Nya kembali segala kepemilikan di langit dan bumi.",
+      "citations": [
+        { "referenceId": "quran", "location": "QS. Al-Hijr [15]: 23" },
+        { "referenceId": "saadi", "location": "Tafsir QS. Al-Hijr: 23" }
+      ]
+    },
+    {
+      "id": 98,
+      "stage": 7,
+      "arabic": "ٱلرَّشِيدُ",
+      "latin": "Ar-Rasyid",
+      "meaning": "Yang Maha Tepat Kebijaksanaan-Nya",
+      "explanation": "Seluruh perbuatan dan pengaturan Allah berjalan tepat menuju tujuan yang benar dan bijaksana, serta membimbing hamba kepada kebenaran.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Ar-Rasyid" },
+        { "referenceId": "tirmidzi", "location": "Hadis no. 3507" }
+      ]
+    },
+    {
+      "id": 99,
+      "stage": 7,
+      "arabic": "ٱلصَّبُورُ",
+      "latin": "Ash-Shabur",
+      "meaning": "Yang Maha Sabar",
+      "explanation": "Allah tidak tergesa-gesa menghukum hamba yang berbuat dosa, melainkan menangguhkan dengan hikmah dan membuka pintu taubat seluas-luasnya.",
+      "citations": [
+        { "referenceId": "ghazali", "location": "Syarh Ash-Shabur" },
+        { "referenceId": "bukhari", "location": "Hadis no. 7378" }
+      ]
+    }
+  ]
+}
