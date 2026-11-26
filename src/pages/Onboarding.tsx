@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
-import { Check } from 'lucide-react';
+import { Link } from 'react-router';
+import { ArrowLeft, Check } from 'lucide-react';
 import { BISMILLAH, SOURCE_NOTE } from '@/data';
 import { TARGET_DAY_PRESETS, sanitizeUserName } from '@/domain';
 import { useUserStore } from '@/store/useUserStore';
@@ -32,7 +33,16 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
   };
 
   return (
-    <main className="animate-page-enter flex flex-1 flex-col justify-between px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] lg:flex-none lg:p-0">
+    <main className="animate-page-enter flex flex-1 flex-col justify-between px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))] lg:flex-none lg:p-0">
+      <div className="mb-4 lg:mb-5">
+        <Link
+          to="/"
+          className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-cream-200 bg-white px-3.5 text-sm font-semibold text-stone-700 transition-colors hover:bg-cream-100 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:bg-stone-800"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          <span>Kembali ke Daftar 99 Nama</span>
+        </Link>
+      </div>
       <div className="lg:grid lg:grid-cols-12 lg:overflow-hidden lg:rounded-3xl lg:border lg:border-cream-200 lg:bg-white lg:shadow-sm lg:dark:border-stone-800 lg:dark:bg-stone-900">
         {/* Panel Kiri (Desktop) / Header Bismillah (Mobile) */}
         <section
@@ -185,7 +195,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                 </button>
               </div>
               <p className="mt-2 text-xs text-stone-500 dark:text-stone-400">
-                Pilihan ini dapat diubah kapan saja di halaman Setting.
+                Pilihan ini dapat diubah kapan saja di halaman Pengaturan.
               </p>
             </fieldset>
 

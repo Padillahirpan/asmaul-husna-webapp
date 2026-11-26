@@ -80,7 +80,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
           onClick={onOpenDrilling}
           className="hidden min-h-11 shrink-0 items-center gap-2 rounded-2xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-primary-700 lg:inline-flex dark:bg-primary-500 dark:hover:bg-primary-600"
         >
-          <span>{lastSummary ? 'Buka Halaman Drilling' : 'Mulai Latihan Pertama'}</span>
+          <span>{lastSummary ? 'Buka Halaman Latihan' : 'Mulai Latihan Pertama'}</span>
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </button>
       </header>
@@ -169,7 +169,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
             <p className="mt-4 hidden border-t border-cream-200 pt-3.5 text-xs leading-relaxed text-stone-600 lg:block dark:border-stone-800 dark:text-stone-400">
               {practicedToday
                 ? 'Alhamdulillah, sesi latihan hari ini sudah tercatat.'
-                : 'Selesaikan satu sesi drilling (15 pasangan) hari ini untuk menjaga ritme harian.'}
+                : 'Selesaikan satu sesi latihan (15 pasangan) hari ini untuk menjaga ritme harian.'}
             </p>
           </section>
 
@@ -197,7 +197,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
                   : 'Mode Acak — 99 Nama Terbuka'}
               </span>
               <span className="flex items-center gap-0.5 text-xs font-medium text-stone-500 transition-colors group-hover:text-primary-700 dark:text-stone-400 dark:group-hover:text-primary-300">
-                Drilling
+                Latihan
                 <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </div>
@@ -281,7 +281,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
               {lastSummary ? (
                 <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                   <span className="text-stone-500 dark:text-stone-400">
-                    Drilling terakhir (
+                    Latihan terakhir (
                     {new Date(lastSummary.completedAt).toLocaleDateString('id-ID', {
                       day: 'numeric',
                       month: 'short',
@@ -295,7 +295,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
                 </div>
               ) : (
                 <p className="text-center text-xs leading-relaxed text-stone-600 lg:text-left dark:text-stone-400">
-                  Belum ada sesi drilling. Mulai sesi pertama Anda hari ini (5 pertanyaan, 15 nama).
+                  Belum ada sesi latihan. Mulai sesi pertama Anda hari ini (5 pertanyaan, 15 nama).
                 </p>
               )}
             </div>
@@ -310,7 +310,7 @@ export default function Dashboard({ onOpenDrilling, onOpenSettings }: DashboardP
         className="mt-auto pt-5 lg:hidden"
       >
         <span className="flex min-h-12 w-full items-center justify-center rounded-2xl bg-primary-600 px-5 py-3.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-primary-700 active:bg-primary-800 dark:bg-primary-500 dark:hover:bg-primary-600">
-          {lastSummary ? 'Buka Halaman Drilling' : 'Mulai Latihan Pertama'}
+          {lastSummary ? 'Buka Halaman Latihan' : 'Mulai Latihan Pertama'}
         </span>
       </button>
     </main>

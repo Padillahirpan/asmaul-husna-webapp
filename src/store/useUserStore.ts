@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { createJSONStorage, persist, type StateStorage } from 'zustand/middleware';
 import type { DrillingSession, DrillingSummary, LearningMode, NameId, PairResult, Theme, UserState } from '@/types';
 import {
   answerPair as answerPairDomain,
@@ -39,9 +40,24 @@ interface UserStoreActions {
   abandonDrilling: () => void;
 }
 
+const noopStorage: StateStorage = {
+  getItem: () => null,
+  setItem: () => undefined,
+  removeItem: () => undefined,
+};
+
+const safeStorage = createJSONStorage(() =>
+  typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+    ? window.localStorage
+    : noopStorage,
+);
+
 export interface UserStore extends UserState, UserStoreActions {
   /** Sesi aktif — transien, tidak dipersist. */
   session: DrillingSession | null;
+  /** Menandai apakah state dari localStorage sudah direhidrasi di sisi klien. */
+  hasHydrated: boolean;
+  setHasHydrated: (hydrated: boolean) => void;
 }
 
 const pickState = (s: UserStore): UserState => ({
@@ -63,6 +79,8 @@ export const useUserStore = create<UserStore>()(
     (set, get) => ({
       ...createDefaultUserState(today()),
       session: null,
+      hasHydrated: false,
+      setHasHydrated: (hasHydrated) => set({ hasHydrated }),
 
       completeOnboarding: (input) => set(completeOnboardingDomain(pickState(get()), { ...input, today: today() })),
       setUserName: (name) => {
@@ -97,9 +115,24 @@ export const useUserStore = create<UserStore>()(
     {
       name: STORAGE_KEY,
       version: STORAGE_VERSION,
-      storage: createJSONStorage(() => localStorage),
+      storage: safeStorage,
+      skipHydration: true,
       partialize: (s) => pickState(s),
       merge: (persisted, current) => ({ ...current, ...normalizeUserState(persisted, today()) }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     },
   ),
 );
+
+/**
+ * Menghidrasi state dari localStorage setelah mount di sisi klien.
+ * Menggunakan `skipHydration: true` memastikan render pertama klien selalu identik
+ * dengan HTML statis hasil pre-render (bebas hydration mismatch).
+ */
+export function useHydrateUserStore() {
+  useEffect(() => {
+    void useUserStore.persist.rehydrate();
+  }, []);
+}

@@ -179,11 +179,10 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
             <div className="rounded-3xl border border-cream-200 bg-white p-4 lg:bg-cream-50 dark:border-stone-800 dark:bg-stone-900 lg:dark:bg-stone-950/60">
               <p className="text-xs text-stone-500 dark:text-stone-400">Poin bersih sesi</p>
               <p
-                className={`mt-1 text-2xl font-bold ${
-                  completedSummary.netPoints >= 0
-                    ? 'text-emerald-700 dark:text-emerald-400'
-                    : 'text-primary-600 dark:text-primary-400'
-                }`}
+                className={`mt-1 text-2xl font-bold ${completedSummary.netPoints >= 0
+                  ? 'text-emerald-700 dark:text-emerald-400'
+                  : 'text-primary-600 dark:text-primary-400'
+                  }`}
               >
                 {completedSummary.netPoints >= 0 ? '+' : ''}
                 {completedSummary.netPoints}
@@ -206,7 +205,7 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
             onClick={() => setCompletedSummary(null)}
             className="mt-7 hidden min-h-12 w-full rounded-2xl bg-primary-600 px-5 py-3.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-primary-700 lg:block dark:bg-primary-500 dark:hover:bg-primary-600"
           >
-            Kembali ke Halaman Drilling
+            Kembali ke Halaman Latihan
           </button>
         </div>
 
@@ -238,7 +237,7 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
           <button
             type="button"
             onClick={() => setShowExitModal(true)}
-            aria-label="Keluar dari sesi drilling"
+            aria-label="Keluar dari sesi latihan"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cream-200 bg-white text-stone-700 transition-colors hover:bg-cream-100 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:bg-stone-800"
           >
             <X className="h-5 w-5" aria-hidden="true" />
@@ -260,7 +259,7 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
               aria-valuenow={progressPct}
               aria-valuemin={0}
               aria-valuemax={100}
-              aria-label="Progres sesi drilling"
+              aria-label="Progres sesi latihan"
             >
               <div
                 className="h-full rounded-full bg-primary-500 transition-all duration-300 dark:bg-primary-400"
@@ -312,9 +311,8 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                       {matched && (
                         <span
                           aria-hidden="true"
-                          className={`absolute right-2.5 top-2.5 ${
-                            res.correct ? 'text-emerald-600 dark:text-emerald-400' : 'text-primary-600 dark:text-primary-400'
-                          }`}
+                          className={`absolute right-2.5 top-2.5 ${res.correct ? 'text-emerald-600 dark:text-emerald-400' : 'text-primary-600 dark:text-primary-400'
+                            }`}
                         >
                           {res.correct ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
                         </span>
@@ -364,9 +362,8 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                       <span className="text-sm font-medium md:text-base">{item.meaning}</span>
                       {matched && (
                         <span
-                          className={`shrink-0 text-xs font-semibold ${
-                            res.correct ? 'text-emerald-700 dark:text-emerald-400' : 'text-stone-500'
-                          }`}
+                          className={`shrink-0 text-xs font-semibold ${res.correct ? 'text-emerald-700 dark:text-emerald-400' : 'text-stone-500'
+                            }`}
                         >
                           {res.correct ? '+20' : 'Terjawab'}
                         </span>
@@ -437,7 +434,6 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
   const overallAvg = Math.round(calculateOverallAverage(points) * 10) / 10;
   const memorizedCount = NAMES.filter((n) => getPoints(points, n.id) >= 100).length;
   const allMastered = isAllStagesMastered(unlockedStage, points);
-  const unlockedCount = unlockedStage === 7 ? 99 : unlockedStage * 15;
   const visibleStages = stageFilter === 'all' ? STAGE_NUMBERS : [stageFilter];
 
   return (
@@ -454,7 +450,7 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
         </button>
         <div>
           <h1 className="text-lg font-bold tracking-tight text-stone-900 lg:text-2xl dark:text-stone-100">
-            Drilling Hafalan
+            Latihan Hafalan
           </h1>
           <p className="text-xs text-stone-500 lg:text-sm dark:text-stone-400">
             5 pertanyaan, 15 pasangan nama
@@ -489,9 +485,6 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                   style={{ width: `${Math.min(100, (stageAvg / UNLOCK_THRESHOLD) * 100)}%` }}
                 />
               </div>
-              <p className="text-xs leading-relaxed text-stone-600 dark:text-stone-400">
-                Soal diambil dari {unlockedCount} nama yang sudah terbuka dengan prioritas poin terendah.
-              </p>
             </>
           ) : (
             <>
@@ -513,9 +506,6 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                   style={{ width: `${Math.min(100, overallAvg)}%` }}
                 />
               </div>
-              <p className="text-xs leading-relaxed text-stone-600 dark:text-stone-400">
-                Soal diambil dari seluruh 99 nama dengan prioritas poin terendah lebih dulu.
-              </p>
             </>
           )}
         </div>
@@ -525,7 +515,7 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
           onClick={handleStart}
           className="mt-4 min-h-12 w-full rounded-2xl bg-primary-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-primary-700 active:bg-primary-800 lg:mt-0 lg:w-52 lg:shrink-0 dark:bg-primary-500 dark:hover:bg-primary-600"
         >
-          Mulai Drilling
+          Mulai Latihan
         </button>
       </section>
 
@@ -547,11 +537,10 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
               type="button"
               aria-pressed={stageFilter === 'all'}
               onClick={() => setStageFilter('all')}
-              className={`min-h-9 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors ${
-                stageFilter === 'all'
-                  ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
-                  : 'border-cream-200 bg-white text-stone-600 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300'
-              }`}
+              className={`min-h-9 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors ${stageFilter === 'all'
+                ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
+                : 'border-cream-200 bg-white text-stone-600 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300'
+                }`}
             >
               Semua
             </button>
@@ -561,11 +550,10 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                 type="button"
                 aria-pressed={stageFilter === s}
                 onClick={() => setStageFilter(s)}
-                className={`min-h-9 min-w-9 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                  stageFilter === s
-                    ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
-                    : 'border-cream-200 bg-white text-stone-600 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300'
-                }`}
+                className={`min-h-9 min-w-9 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition-colors ${stageFilter === s
+                  ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
+                  : 'border-cream-200 bg-white text-stone-600 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-300'
+                  }`}
               >
                 {s}
               </button>
@@ -603,11 +591,10 @@ export default function Drilling({ onBack, onSelectName }: DrillingProps) {
                       type="button"
                       onClick={() => onSelectName(item.id)}
                       aria-label={`${item.id}. ${item.latin}, ${item.meaning}, ${pts} poin${unlocked ? '' : ', terkunci'}`}
-                      className={`flex min-h-28 flex-col justify-between rounded-2xl border p-2.5 text-left transition-colors lg:min-h-32 lg:p-3.5 ${
-                        unlocked
-                          ? 'border-cream-200 bg-white shadow-2xs hover:border-primary-300 dark:border-stone-800 dark:bg-stone-900/80 dark:hover:border-primary-800'
-                          : 'border-cream-200/70 bg-cream-100/60 opacity-75 hover:opacity-100 dark:border-stone-800/70 dark:bg-stone-900/40'
-                      }`}
+                      className={`flex min-h-28 flex-col justify-between rounded-2xl border p-2.5 text-left transition-colors lg:min-h-32 lg:p-3.5 ${unlocked
+                        ? 'border-cream-200 bg-white shadow-2xs hover:border-primary-300 dark:border-stone-800 dark:bg-stone-900/80 dark:hover:border-primary-800'
+                        : 'border-cream-200/70 bg-cream-100/60 opacity-75 hover:opacity-100 dark:border-stone-800/70 dark:bg-stone-900/40'
+                        }`}
                     >
                       <div className="flex w-full items-center justify-between">
                         <span className="text-[11px] font-semibold text-stone-500 dark:text-stone-400">

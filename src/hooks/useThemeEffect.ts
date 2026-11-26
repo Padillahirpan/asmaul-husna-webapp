@@ -7,6 +7,7 @@ const DARK_THEME_COLOR = '#0c0a09';
 /** Sinkronkan kelas `.dark` pada `<html>` & `<meta name="theme-color">` dengan pilihan tema. */
 export function useThemeEffect(theme: Theme) {
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return undefined;
     const root = document.documentElement;
     const media = window.matchMedia('(prefers-color-scheme: dark)');
 
