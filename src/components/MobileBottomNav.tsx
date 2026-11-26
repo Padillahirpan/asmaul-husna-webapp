@@ -1,10 +1,9 @@
 import { NavLink, useLocation } from 'react-router';
-import { BookOpen, Flame, ListChecks, Settings } from 'lucide-react';
+import { BookOpen, Flame, Settings } from 'lucide-react';
 
 const MOBILE_NAV_ITEMS = [
   { to: '/', label: '99 Nama', Icon: BookOpen, matchPrefix: '/nama' },
-  { to: '/hafalan', label: 'Progres', Icon: Flame },
-  { to: '/latihan', label: 'Latihan', Icon: ListChecks },
+  { to: '/hafalan', label: 'Hafalan', Icon: Flame },
   { to: '/pengaturan', label: 'Pengaturan', Icon: Settings },
 ] as const;
 
@@ -16,7 +15,7 @@ export function MobileBottomNav() {
       aria-label="Navigasi bawah"
       className="fixed inset-x-0 bottom-0 z-30 border-t border-cream-200 bg-cream-50/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:hidden dark:border-stone-800 dark:bg-stone-900/95"
     >
-      <div className="mx-auto grid max-w-md grid-cols-4 px-2 py-1 md:max-w-2xl">
+      <div className="mx-auto grid max-w-md grid-cols-3 px-2 py-1 md:max-w-2xl">
         {MOBILE_NAV_ITEMS.map(({ to, label, Icon, ...rest }) => {
           const matchPrefix = 'matchPrefix' in rest ? rest.matchPrefix : undefined;
           const isExtraActive =

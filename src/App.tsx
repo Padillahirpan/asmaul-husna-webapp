@@ -50,14 +50,15 @@ export default function App() {
   }, [location.pathname]);
 
   const isOnboardingRoute =
-    !onboardingCompleted && (location.pathname === '/hafalan' || location.pathname === '/latihan');
+    !onboardingCompleted &&
+    (location.pathname === '/hafalan' || location.pathname === '/hafalan/latihan');
 
   const showNav = !hasActiveSession && !isOnboardingRoute;
 
   const openNameFromLatihan = useCallback(
     (id: NameId) => {
       const slug = getSlugByNameId(id);
-      if (slug) navigate(`/nama/${slug}`, { state: { from: '/latihan' } });
+      if (slug) navigate(`/nama/${slug}`, { state: { from: '/hafalan/latihan' } });
     },
     [navigate],
   );
@@ -85,15 +86,16 @@ export default function App() {
               path="/hafalan"
               element={
                 <Dashboard
-                  onOpenDrilling={() => navigate('/latihan')}
+                  onOpenDrilling={() => navigate('/hafalan/latihan')}
                   onOpenSettings={() => navigate('/pengaturan')}
                 />
               }
             />
             <Route
-              path="/latihan"
+              path="/hafalan/latihan"
               element={<Drilling onBack={() => navigate('/hafalan')} onSelectName={openNameFromLatihan} />}
             />
+            <Route path="/latihan" element={<Navigate to="/hafalan/latihan" replace />} />
             <Route
               path="/pengaturan"
               element={

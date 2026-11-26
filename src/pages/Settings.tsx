@@ -143,7 +143,7 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
               </div>
             </div>
             <Link
-              to="/latihan"
+              to="/hafalan/latihan"
               className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-primary-600 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
             >
               Mulai Latihan Hafalan
@@ -323,9 +323,22 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
         </div>
       )}
 
-      {/* Versi */}
-      <footer className="mt-8 text-center text-xs text-stone-500 lg:text-left dark:text-stone-400">
-        Versi {APP_VERSION.number} {APP_VERSION.label}
+      {/* Versi & Kredit */}
+      <footer className="mt-8 space-y-1 text-center text-xs text-stone-500 lg:text-left dark:text-stone-400">
+        <p>
+          Versi {APP_VERSION.number} {APP_VERSION.label}
+        </p>
+        <p>
+          Made with love and coffee by{' '}
+          <a
+            href="https://www.ipadillah.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-200 dark:decoration-stone-700 dark:hover:text-primary-300"
+          >
+            ipadillah
+          </a>
+        </p>
       </footer>
 
       {onboardingCompleted && (

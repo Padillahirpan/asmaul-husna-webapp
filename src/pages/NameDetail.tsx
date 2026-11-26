@@ -67,8 +67,8 @@ export default function NameDetail({ onToast }: NameDetailProps) {
   const prevSlug = item.id > 1 ? getSlugByNameId(item.id - 1) : undefined;
   const nextSlug = item.id < TOTAL_NAMES ? getSlugByNameId(item.id + 1) : undefined;
 
-  const backTo = fromState === '/latihan' ? '/latihan' : '/';
-  const backLabel = fromState === '/latihan' ? 'Halaman Latihan' : 'Daftar 99 Nama';
+  const backTo = fromState === '/hafalan/latihan' ? '/hafalan/latihan' : '/';
+  const backLabel = fromState === '/hafalan/latihan' ? 'Halaman Latihan' : 'Daftar 99 Nama';
 
   const handleCopy = async () => {
     const text = `${item.id}. ${item.arabic} — ${item.latin}: ${item.meaning}`;
@@ -270,7 +270,7 @@ export default function NameDetail({ onToast }: NameDetailProps) {
                 </div>
               </div>
               <Link
-                to="/latihan"
+                to="/hafalan/latihan"
                 className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-2xl bg-primary-600 px-4 py-2.5 text-xs font-semibold text-white shadow-2xs transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
               >
                 {onboardingCompleted ? 'Buka Latihan' : 'Mulai Latihan'}

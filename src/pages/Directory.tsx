@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
-import { BookOpen, Check, ChevronDown, Copy, Flame, Search, X } from 'lucide-react';
-import { BISMILLAH, NAMES, SOURCE_NOTE, getNameSlug } from '@/data';
+import { Check, ChevronDown, Copy, Search, X } from 'lucide-react';
+import { NAMES, SOURCE_NOTE, getNameSlug } from '@/data';
 import { ASMAUL_HUSNA_FAQ } from '@/data/faq';
-import { ALL_NAME_IDS, countByStatus, getPoints, getWeeklyStreak, toLocalDateKey } from '@/domain';
+import { getPoints } from '@/domain';
 import { useUserStore } from '@/store/useUserStore';
 import type { AsmaName } from '@/types';
 
@@ -32,7 +32,6 @@ function matchesQuery(item: AsmaName, rawQuery: string, normalizedQuery: string)
 export default function Directory({ onToast }: DirectoryProps) {
   const onboardingCompleted = useUserStore((s) => s.onboardingCompleted);
   const points = useUserStore((s) => s.points);
-  const completedDates = useUserStore((s) => s.completedDates);
 
   const [query, setQuery] = useState('');
   const [copiedId, setCopiedId] = useState<number | null>(null);
@@ -43,12 +42,6 @@ export default function Directory({ onToast }: DirectoryProps) {
     () => NAMES.filter((item) => matchesQuery(item, query, normalizedQuery)),
     [query, normalizedQuery],
   );
-
-  const { streak } = useMemo(
-    () => getWeeklyStreak(completedDates, toLocalDateKey(new Date())),
-    [completedDates],
-  );
-  const { memorized } = useMemo(() => countByStatus(points, ALL_NAME_IDS), [points]);
 
   const handleCopy = async (item: AsmaName) => {
     const text = `${item.id}. ${item.arabic} — ${item.latin}: ${item.meaning}`;
@@ -70,78 +63,7 @@ export default function Directory({ onToast }: DirectoryProps) {
 
   return (
     <main className="animate-page-enter flex flex-1 flex-col px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] lg:px-8 lg:py-8">
-      {/* Header Pembuka */}
-      <header className="mb-6 lg:mb-8">
-        <p className="arabic-text text-xl font-bold text-stone-800 sm:text-2xl dark:text-stone-200">
-          {BISMILLAH.arabic}
-        </p>
-        <h1 className="mt-2 text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-stone-100">
-          99 Asmaul Husna: Arab, Latin, dan Artinya
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-stone-600 sm:text-base dark:text-stone-300">
-          Daftar lengkap 99 nama Allah yang indah beserta tulisan Arab berharakat, transliterasi Latin, arti bahasa Indonesia, dan penjelasan berreferensi.
-        </p>
-      </header>
-
-      {/* Banner Funnel Adaptif ke Fitur Hafalan */}
-      <section
-        aria-label={onboardingCompleted ? 'Ringkasan progres hafalan' : 'Ajakan latihan hafalan'}
-        className="mb-6 rounded-3xl border border-primary-200/80 bg-primary-50/70 p-4 sm:p-5 dark:border-primary-900/60 dark:bg-primary-950/30"
-      >
-        {onboardingCompleted ? (
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary-200 bg-white text-primary-700 dark:border-primary-800/70 dark:bg-stone-900 dark:text-primary-300">
-                <Flame className="h-5 w-5" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                  {streak} hari beruntun &middot; {memorized}/99 nama hafal
-                </p>
-                <p className="mt-0.5 text-xs leading-relaxed text-stone-600 dark:text-stone-300">
-                  Lanjutkan sesi latihan singkat Anda hari ini untuk menjaga ritme hafalan.
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <Link
-                to="/latihan"
-                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-2xl bg-primary-600 px-4 py-2.5 text-sm font-semibold text-white shadow-2xs transition-colors hover:bg-primary-700 sm:flex-none dark:bg-primary-500 dark:hover:bg-primary-600"
-              >
-                Lanjut Latihan
-              </Link>
-              <Link
-                to="/hafalan"
-                className="inline-flex min-h-11 flex-1 items-center justify-center rounded-2xl border border-cream-300 bg-white px-4 py-2.5 text-sm font-semibold text-stone-700 transition-colors hover:bg-cream-100 sm:flex-none dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:bg-stone-800"
-              >
-                Lihat Progres
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-primary-200 bg-white text-primary-700 dark:border-primary-800/70 dark:bg-stone-900 dark:text-primary-300">
-                <BookOpen className="h-5 w-5" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                  Ingin menghafal 99 Asmaul Husna beserta artinya?
-                </p>
-                <p className="mt-0.5 text-xs leading-relaxed text-stone-600 dark:text-stone-300">
-                  Uji ingatan lewat latihan singkat 2 menit (5 pertanyaan, 15 nama) secara bertahap atau acak.
-                </p>
-              </div>
-            </div>
-            <Link
-              to="/latihan"
-              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-2xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-2xs transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
-            >
-              Mulai Latihan
-            </Link>
-          </div>
-        )}
-      </section>
+      <h1 className="sr-only">99 Asmaul Husna: Arab, Latin, dan Artinya</h1>
 
       {/* Pencarian Instan */}
       <section aria-label="Pencarian Asmaul Husna" className="mb-5">
@@ -299,6 +221,18 @@ export default function Directory({ onToast }: DirectoryProps) {
           </div>
         </div>
       </section>
+
+      <footer className="mt-10 border-t border-cream-200 pt-6 text-center text-xs text-stone-500 dark:border-stone-800 dark:text-stone-400">
+        Made with love and coffee by{' '}
+        <a
+          href="https://www.ipadillah.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-200 dark:decoration-stone-700 dark:hover:text-primary-300"
+        >
+          ipadillah
+        </a>
+      </footer>
     </main>
   );
 }

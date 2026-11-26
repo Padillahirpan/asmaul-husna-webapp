@@ -52,7 +52,7 @@ function buildSitemapXml(routes, siteUrl) {
   const entries = routes
     .map((route) => {
       const loc = route === '/' ? `${baseUrl}/` : `${baseUrl}${route}`;
-      const priority = route === '/' ? '1.0' : route === '/latihan' ? '0.9' : '0.8';
+      const priority = route === '/' ? '1.0' : route === '/hafalan/latihan' ? '0.9' : '0.8';
       return [
         '  <url>',
         `    <loc>${loc}</loc>`,
@@ -70,7 +70,6 @@ function buildRobotsTxt(siteUrl) {
   const lines = [
     'User-agent: *',
     'Allow: /',
-    'Disallow: /hafalan',
     'Disallow: /pengaturan',
   ];
   if (siteUrl) {

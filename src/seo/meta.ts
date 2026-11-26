@@ -119,7 +119,7 @@ export function getRouteSeoMeta(rawPathname: string, rawSiteUrl?: string): Route
   }
 
   // Halaman Latihan (publik, cocok untuk keyword "latihan / kuis asmaul husna")
-  if (pathname === '/latihan') {
+  if (pathname === '/hafalan/latihan') {
     return {
       title: 'Latihan Hafalan 99 Asmaul Husna Interaktif — Asmaul Husna',
       description:

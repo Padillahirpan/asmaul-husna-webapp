@@ -32,8 +32,8 @@ describe('seo/meta', () => {
     expect(meta.jsonLd[1]?.['@type']).toBe('DefinedTerm');
   });
 
-  it('mengatur noindex pada halaman personal (/hafalan, /pengaturan) dan index pada /latihan', () => {
-    expect(getRouteSeoMeta('/latihan').robots).toBe('index, follow');
+  it('mengatur noindex pada halaman personal (/hafalan, /pengaturan) dan index pada /hafalan/latihan', () => {
+    expect(getRouteSeoMeta('/hafalan/latihan').robots).toBe('index, follow');
     expect(getRouteSeoMeta('/hafalan').robots).toBe('noindex, follow');
     expect(getRouteSeoMeta('/pengaturan').robots).toBe('noindex, follow');
     expect(getRouteSeoMeta('/nama/tidak-ada').robots).toBe('noindex, follow');

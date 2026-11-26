@@ -10,13 +10,13 @@ export function getPrerenderRoutes(): string[] {
     '/',
     ...ALL_NAME_SLUGS.map((slug) => `/nama/${slug}`),
     '/hafalan',
-    '/latihan',
+    '/hafalan/latihan',
     '/pengaturan',
   ];
 }
 
 export function getSitemapRoutes(): string[] {
-  return ['/', '/latihan', ...ALL_NAME_SLUGS.map((slug) => `/nama/${slug}`)];
+  return ['/', '/hafalan/latihan', ...ALL_NAME_SLUGS.map((slug) => `/nama/${slug}`)];
 }
 
 export function render(

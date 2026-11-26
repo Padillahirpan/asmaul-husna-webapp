@@ -1,5 +1,5 @@
 import { Link, NavLink, useLocation } from 'react-router';
-import { BookOpen, Flame, ListChecks, Settings } from 'lucide-react';
+import { BookOpen, Flame, Settings } from 'lucide-react';
 import { APP_VERSION } from '@/data';
 import { ALL_NAME_IDS, countByStatus, getWeeklyStreak, toLocalDateKey } from '@/domain';
 import { useUserStore } from '@/store/useUserStore';
@@ -7,7 +7,6 @@ import { useUserStore } from '@/store/useUserStore';
 const NAV_ITEMS = [
   { to: '/', label: '99 Asmaul Husna', Icon: BookOpen, matchPrefix: '/nama' },
   { to: '/hafalan', label: 'Progres & Streak', Icon: Flame },
-  { to: '/latihan', label: 'Latihan', Icon: ListChecks },
   { to: '/pengaturan', label: 'Pengaturan', Icon: Settings },
 ] as const;
 
@@ -15,8 +14,6 @@ export function DesktopSidebar() {
   const location = useLocation();
   const onboardingCompleted = useUserStore((s) => s.onboardingCompleted);
   const userName = useUserStore((s) => s.userName);
-  const learningMode = useUserStore((s) => s.learningMode);
-  const unlockedStage = useUserStore((s) => s.unlockedStage);
   const points = useUserStore((s) => s.points);
   const completedDates = useUserStore((s) => s.completedDates);
 
@@ -31,18 +28,8 @@ export function DesktopSidebar() {
       <div>
         {/* Identitas Aplikasi */}
         <Link to="/" className="mb-7 block rounded-2xl px-2 py-1">
-          <p className="arabic-text text-xl font-bold text-stone-900 dark:text-stone-100">
-            أَسْمَاءُ ٱللَّٰهِ ٱلْحُسْنَىٰ
-          </p>
           <p className="mt-0.5 text-sm font-bold tracking-tight text-stone-900 dark:text-stone-100">
-            Asmaul Husna
-          </p>
-          <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
-            {onboardingCompleted
-              ? learningMode === 'sequential'
-                ? `Mode Bertahap — Tahap ${unlockedStage}/7`
-                : 'Mode Acak — 99 Nama'
-              : 'Direktori & Latihan Hafalan'}
+            99 Asmaul Husna
           </p>
         </Link>
 
@@ -75,7 +62,7 @@ export function DesktopSidebar() {
         </nav>
       </div>
 
-      {/* Ringkasan Singkat / Ajakan & Versi */}
+      {/* Ringkasan Singkat / Ajakan, Versi & Kredit */}
       <div className="space-y-3">
         {onboardingCompleted ? (
           <Link
@@ -105,16 +92,29 @@ export function DesktopSidebar() {
               Latih 99 Asmaul Husna per 15 nama dan pantau progres harian Anda.
             </p>
             <Link
-              to="/latihan"
+              to="/hafalan/latihan"
               className="mt-3 inline-flex min-h-9 w-full items-center justify-center rounded-xl bg-primary-600 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600"
             >
               Mulai Latihan
             </Link>
           </div>
         )}
-        <p className="px-2 text-[11px] text-stone-500 dark:text-stone-500">
-          Versi {APP_VERSION.number} {APP_VERSION.label}
-        </p>
+        <div className="space-y-1 px-2 text-[11px] text-stone-500 dark:text-stone-500">
+          <p>
+            Versi {APP_VERSION.number} {APP_VERSION.label}
+          </p>
+          <p>
+            Made with love and coffee by{' '}
+            <a
+              href="https://www.ipadillah.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-300 dark:decoration-stone-700 dark:hover:text-primary-300"
+            >
+              ipadillah
+            </a>
+          </p>
+        </div>
       </div>
     </aside>
   );
