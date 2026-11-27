@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Ikon 99 Asmaul Husna">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#057855" />
+      <stop offset="55%" stop-color="#036144" />
+      <stop offset="100%" stop-color="#024430" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7e5be" />
+      <stop offset="100%" stop-color="#deb86e" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dasar kotak membulat zamrud -->
+  <rect x="0" y="0" width="512" height="512" rx="116" fill="url(#bg)" />
+  <rect x="14" y="14" width="484" height="484" rx="104" fill="none" stroke="#fdfbf9" stroke-opacity="0.14" stroke-width="6" />
+
+  <!-- Geometri Rub el Hizb (bintang 8 sudut klasik mushaf) -->
+  <g transform="translate(256 256)">
+    <!-- Persegi 1 (tegak) -->
+    <rect
+      x="-116"
+      y="-116"
+      width="232"
+      height="232"
+      rx="20"
+      fill="#fdfbf9"
+      fill-opacity="0.08"
+      stroke="#fdfbf9"
+      stroke-width="26"
+      stroke-linejoin="round"
+    />
+    <!-- Persegi 2 (diputar 45 derajat) -->
+    <rect
+      x="-116"
+      y="-116"
+      width="232"
+      height="232"
+      rx="20"
+      transform="rotate(45)"
+      fill="#fdfbf9"
+      fill-opacity="0.08"
+      stroke="#fdfbf9"
+      stroke-width="26"
+      stroke-linejoin="round"
+    />
+    <!-- Oktagon tengah sebagai aksen titik pusat -->
+    <circle cx="0" cy="0" r="36" fill="url(#gold)" />
+  </g>
+</svg>
