@@ -65,8 +65,8 @@ export default function App() {
 
   if (isOnboardingRoute) {
     return (
-      <div className="min-h-dvh bg-cream-100 text-stone-800 transition-colors dark:bg-stone-950 dark:text-stone-100">
-        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col bg-cream-50 lg:max-w-5xl lg:justify-center lg:bg-transparent lg:px-8 lg:py-10 dark:bg-stone-900 lg:dark:bg-transparent">
+      <div className="min-h-dvh bg-cream-50 text-stone-800 transition-colors dark:bg-stone-800 dark:text-stone-100">
+        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col bg-cream-50 lg:max-w-5xl lg:justify-center lg:bg-transparent lg:px-8 lg:py-10 dark:bg-stone-800 lg:dark:bg-transparent">
           <Onboarding onComplete={() => navigate(location.pathname, { replace: true })} />
         </div>
         <Toast message={toast} />
@@ -75,10 +75,10 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-dvh bg-cream-100 text-stone-800 transition-colors dark:bg-stone-950 dark:text-stone-100">
+    <div className="flex min-h-dvh bg-cream-50 text-stone-800 transition-colors dark:bg-stone-800 dark:text-stone-100">
       {showNav && <DesktopSidebar />}
-      <div className={`flex min-h-dvh min-w-0 flex-1 flex-col ${showNav ? 'pb-16 lg:pb-0' : ''}`}>
-        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col border-x border-cream-200/80 bg-cream-50 md:max-w-2xl lg:max-w-5xl lg:border-x-0 lg:bg-transparent dark:border-stone-800/80 dark:bg-stone-900 lg:dark:bg-transparent">
+      <div className={`flex min-h-dvh min-w-0 flex-1 flex-col ${showNav ? 'pb-34 lg:pb-0' : ''}`}>
+        <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col md:max-w-2xl lg:max-w-5xl lg:border-x-0 lg:bg-transparent dark:border-stone-800/80 dark:bg-stone-800 lg:dark:bg-transparent">
           <Routes>
             <Route path="/" element={<Directory onToast={showToast} />} />
             <Route path="/nama/:slug" element={<NameDetail onToast={showToast} />} />

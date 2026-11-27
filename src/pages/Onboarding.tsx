@@ -113,11 +113,10 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   setUserName(e.target.value);
                   if (nameError) setNameError(null);
                 }}
-                className={`min-h-12 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-stone-900 transition-colors placeholder:text-stone-400 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 ${
-                  nameError
+                className={`min-h-12 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-stone-900 transition-colors placeholder:text-stone-400 dark:bg-stone-950/60 dark:text-stone-100 dark:placeholder:text-stone-500 ${nameError
                     ? 'border-primary-500 dark:border-primary-400'
                     : 'border-cream-300 hover:border-stone-400 dark:border-stone-700'
-                }`}
+                  }`}
               />
               {nameError && (
                 <p
@@ -141,11 +140,10 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   role="radio"
                   aria-checked={learningMode === 'sequential'}
                   onClick={() => setLearningMode('sequential')}
-                  className={`min-h-11 rounded-2xl border p-4 text-left transition-colors ${
-                    learningMode === 'sequential'
+                  className={`min-h-11 rounded-2xl border p-4 text-left transition-colors ${learningMode === 'sequential'
                       ? 'border-primary-500 bg-primary-50 ring-1 ring-primary-500 dark:border-primary-400 dark:bg-primary-950/35 dark:ring-primary-400'
                       : 'border-cream-200 bg-white hover:border-cream-300 dark:border-stone-800 dark:bg-stone-950/50 dark:hover:border-stone-700'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
@@ -170,11 +168,10 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   role="radio"
                   aria-checked={learningMode === 'random'}
                   onClick={() => setLearningMode('random')}
-                  className={`min-h-11 rounded-2xl border p-4 text-left transition-colors ${
-                    learningMode === 'random'
+                  className={`min-h-11 rounded-2xl border p-4 text-left transition-colors ${learningMode === 'random'
                       ? 'border-primary-500 bg-primary-50 ring-1 ring-primary-500 dark:border-primary-400 dark:bg-primary-950/35 dark:ring-primary-400'
                       : 'border-cream-200 bg-white hover:border-cream-300 dark:border-stone-800 dark:bg-stone-950/50 dark:hover:border-stone-700'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
@@ -216,11 +213,10 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                         setTargetDays(days);
                         setIsCustomDays(false);
                       }}
-                      className={`min-h-11 rounded-2xl border px-2 py-2.5 text-xs font-semibold transition-colors ${
-                        active
+                      className={`min-h-11 rounded-2xl border px-2 py-2.5 text-xs font-semibold transition-colors ${active
                           ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
                           : 'border-cream-200 bg-white text-stone-700 hover:border-cream-300 dark:border-stone-700 dark:bg-stone-950/50 dark:text-stone-200'
-                      }`}
+                        }`}
                     >
                       {days} hari
                     </button>
@@ -230,11 +226,10 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   type="button"
                   aria-pressed={isCustomDays}
                   onClick={() => setIsCustomDays(true)}
-                  className={`min-h-11 rounded-2xl border px-2 py-2.5 text-xs font-semibold transition-colors ${
-                    isCustomDays
+                  className={`min-h-11 rounded-2xl border px-2 py-2.5 text-xs font-semibold transition-colors ${isCustomDays
                       ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
                       : 'border-cream-200 bg-white text-stone-700 hover:border-cream-300 dark:border-stone-700 dark:bg-stone-950/50 dark:text-stone-200'
-                  }`}
+                    }`}
                 >
                   Kustom
                 </button>

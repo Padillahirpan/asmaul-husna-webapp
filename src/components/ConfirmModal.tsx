@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ConfirmModalProps {
   open: boolean;
@@ -33,9 +34,9 @@ export function ConfirmModal({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onCancel]);
 
-  if (!open) return null;
+  if (!open || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/55 p-4 backdrop-blur-[2px]"
       role="dialog"
@@ -72,6 +73,7 @@ export function ConfirmModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

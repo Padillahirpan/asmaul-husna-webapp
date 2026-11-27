@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import {
   WEEKDAY_LABELS,
@@ -82,12 +83,12 @@ export function StreakCalendarModal({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [open, onClose, canPrev, canNext]);
 
-  if (!open) return null;
+  if (!open || typeof document === 'undefined') return null;
 
   const calendar = getMonthCalendar(completedDates, viewMonth, today);
   const isCurrent = compareYearMonth(viewMonth, currentMonth) === 0;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-stone-950/55 backdrop-blur-[2px] sm:items-center sm:p-4"
       role="dialog"
@@ -207,6 +208,7 @@ export function StreakCalendarModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
