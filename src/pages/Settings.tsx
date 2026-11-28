@@ -86,11 +86,10 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
               type="button"
               aria-pressed={active}
               onClick={() => setTheme(key)}
-              className={`flex min-h-11 items-center justify-center gap-1.5 rounded-2xl border px-3 py-2.5 text-xs font-semibold transition-colors ${
-                active
+              className={`flex min-h-11 items-center justify-center gap-1.5 rounded-2xl border px-3 py-2.5 text-xs font-semibold transition-colors ${active
                   ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
                   : 'border-cream-200 bg-cream-50 text-stone-700 hover:border-cream-300 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-200'
-              }`}
+                }`}
             >
               <Icon className="h-4 w-4" aria-hidden="true" />
               {label}
@@ -202,11 +201,10 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
                   role="radio"
                   aria-checked={learningMode === 'sequential'}
                   onClick={() => handleModeChange('sequential')}
-                  className={`min-h-11 rounded-2xl border p-3.5 text-left transition-colors ${
-                    learningMode === 'sequential'
+                  className={`min-h-11 rounded-2xl border p-3.5 text-left transition-colors ${learningMode === 'sequential'
                       ? 'border-primary-500 bg-primary-50 ring-1 ring-primary-500 dark:border-primary-400 dark:bg-primary-950/35 dark:ring-primary-400'
                       : 'border-cream-200 bg-cream-50/70 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-950/50'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
@@ -229,11 +227,10 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
                   role="radio"
                   aria-checked={learningMode === 'random'}
                   onClick={() => handleModeChange('random')}
-                  className={`min-h-11 rounded-2xl border p-3.5 text-left transition-colors ${
-                    learningMode === 'random'
+                  className={`min-h-11 rounded-2xl border p-3.5 text-left transition-colors ${learningMode === 'random'
                       ? 'border-primary-500 bg-primary-50 ring-1 ring-primary-500 dark:border-primary-400 dark:bg-primary-950/35 dark:ring-primary-400'
                       : 'border-cream-200 bg-cream-50/70 hover:border-cream-300 dark:border-stone-800 dark:bg-stone-950/50'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-sm font-semibold text-stone-900 dark:text-stone-100">
@@ -269,11 +266,10 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
                       type="button"
                       aria-pressed={active}
                       onClick={() => handleApplyTargetDays(days)}
-                      className={`min-h-11 rounded-2xl border px-3 py-2.5 text-xs font-semibold transition-colors ${
-                        active
+                      className={`min-h-11 rounded-2xl border px-3 py-2.5 text-xs font-semibold transition-colors ${active
                           ? 'border-primary-600 bg-primary-600 text-white dark:border-primary-500 dark:bg-primary-500'
                           : 'border-cream-200 bg-cream-50 text-stone-700 hover:border-cream-300 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-200'
-                      }`}
+                        }`}
                     >
                       {days} hari
                     </button>
@@ -331,7 +327,7 @@ export default function Settings({ onBack, onToast }: SettingsProps) {
         <p>
           Made with love and coffee by{' '}
           <a
-            href="https://www.ipadillah.com"
+            href="https://ipadillah.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-200 dark:decoration-stone-700 dark:hover:text-primary-300"

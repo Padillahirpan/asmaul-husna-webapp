@@ -47,11 +47,10 @@ export function DesktopSidebar() {
                 end={to === '/'}
                 className={({ isActive }) => {
                   const active = isActive || isExtraActive;
-                  return `flex min-h-11 w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left text-sm font-semibold transition-colors ${
-                    active
+                  return `flex min-h-11 w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left text-sm font-semibold transition-colors ${active
                       ? 'bg-primary-50 text-primary-700 ring-1 ring-primary-200 dark:bg-primary-950/45 dark:text-primary-300 dark:ring-primary-900/70'
                       : 'text-stone-600 hover:bg-cream-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800/70 dark:hover:text-stone-100'
-                  }`;
+                    }`;
                 }}
               >
                 <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -106,7 +105,7 @@ export function DesktopSidebar() {
           <p>
             Made with love and coffee by{' '}
             <a
-              href="https://www.ipadillah.com"
+              href="https://ipadillah.com"
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-300 dark:decoration-stone-700 dark:hover:text-primary-300"

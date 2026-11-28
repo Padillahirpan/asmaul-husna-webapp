@@ -77,7 +77,7 @@ export default function Directory({ onToast }: DirectoryProps) {
           />
           <input
             id="directory-search"
-            type="search"
+            type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Cari nama, arti, Arab, atau nomor (mis. Pengasih, Razzaq, 17)..."
@@ -225,7 +225,7 @@ export default function Directory({ onToast }: DirectoryProps) {
       <footer className="mt-10 border-t border-cream-200 pt-6 text-center text-xs text-stone-500 dark:border-stone-800 dark:text-stone-400">
         Made with love and coffee by{' '}
         <a
-          href="https://www.ipadillah.com"
+          href="https://ipadillah.com"
           target="_blank"
           rel="noopener noreferrer"
           className="font-semibold text-stone-700 underline decoration-stone-300 underline-offset-2 transition-colors hover:text-primary-700 dark:text-stone-200 dark:decoration-stone-700 dark:hover:text-primary-300"
